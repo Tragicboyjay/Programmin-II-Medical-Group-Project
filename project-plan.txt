@@ -1,0 +1,62 @@
+project notes:
+
+Deliverables:
+	- Use case diagram
+	- class diagram
+	- UML diagram
+	- java code
+	- 15-20 minute presentation
+	
+Use case diagram:
+	Actors:
+		Abtract Person
+			- Inherited Doctor
+			- Inherited Patient
+	Use Cases:
+		- add new doctor
+		- add new patient
+		- Make new appointment
+		- change appointment date
+
+		
+			
+UML diagram:		
+	Person
+		data members:
+			- firstname
+			- lastname
+			- date of birth
+		methods:
+			- update birth date
+		
+	Doctor:
+		data members:
+			- date of employment
+			- specialty
+		methods:
+			- update specialty
+			- toString
+		
+	Patient: 
+		data members:
+			- employer
+			- insurance company
+			- address
+			- phone number
+			- toString
+		methods:
+			- make appointment:
+				(create new instance of Treatment class)
+			- update insurance carrier
+			
+	
+	Treatment:
+		data members:
+			- treatment name/type
+			- appointment date
+			- start time
+			- end time
+		
+		methods:
+		
+	
