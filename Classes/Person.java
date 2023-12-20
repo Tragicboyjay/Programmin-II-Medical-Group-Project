@@ -9,46 +9,65 @@
 package Classes;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public abstract class Person {
-    private String firstName;
-    private String lastName;
-    private LocalDate dOB;
+  private String name;
+  private LocalDate birthDate;
+  private int age;
+  private String address;
+  private String phone;
 
-    Person(String aFirstName, String aLastName, LocalDate aDOB){
-        setFirstName(aFirstName);
-        setLastName(aLastName);
-        setDOB(aDOB);
-    }
+  public Person() {}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public Person(String name, LocalDate birthDate, String address, String phone) {
+      this.name = name;
+      setBirthDate(birthDate);
+      this.address = address;
+      this.phone = phone;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setDOB(LocalDate dOB) {
-        // Throw error if date is passes current date.
+  public void setName(String name) {
+    this.name = name;
+  }
 
-        this.dOB = dOB;
-    }
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
 
-    public String getFirstName() {
-        return firstName;
-    }
+  public void setBirthDate(LocalDate birthDate) {
+    this.birthDate = birthDate;
+    Period period = Period.between(this.birthDate, LocalDate.now());
+    this.age = period.getYears();
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public int getAge() {
+    return age;
+  }
 
-    public LocalDate getDOB() {
-        return dOB;
-    }
+  public String getAddress() {
+    return address;
+  }
 
-    @Override
-    public String toString() {
-        return "First Name: " + this.getFirstName() + ", Last Name: " + this.getLastName() + ", DOB: " + this.getDOB();
-    }
-} 
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+  @Override 
+  public String toString() {
+      return String.format("%s %nage: %s%nphone number: %s%naddress: %s%n"
+      , getName(), getAge(), getPhone(), getAddress());
+  }
+}

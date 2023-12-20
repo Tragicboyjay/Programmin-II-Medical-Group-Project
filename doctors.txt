@@ -1,0 +1,18 @@
+Sophie Davis
+1989-04-30
+456 Maple St
+555-673-1234
+Cardiology
+9
+Michael Rodriguez
+1983-08-17
+789 Oak St
+555-432-5678
+Pediatrics
+12
+Emily Turner
+1975-11-22
+876 Pine St
+555-890-9876
+Orthopedics
+14

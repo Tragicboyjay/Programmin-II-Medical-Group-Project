@@ -9,37 +9,74 @@
 package Classes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Doctor extends Person {
-    private String speciality;
-    private LocalDate dateOfEmployment;
+  private int doctorId;
+  private String specialty;
+  private int yearsInPractice;
+  private List<Patient> assignedPatients;
 
-    Doctor(String aFirstName, String aLastName, LocalDate aDOB, String aSpeciality, LocalDate aDateOfEmployment) {
-        super(aFirstName, aLastName, aDOB);
-        setDateOfEmployment(aDateOfEmployment);
-        setSpeciality(aSpeciality);
+  public Doctor() {
+    super();
+  }
 
-    }
+  public Doctor(String name, LocalDate birthDate, String address, String phone, int doctorId, String specialty, int yearsInPractice) {
+    super(name, birthDate, address, phone);
+    this.specialty = specialty;
+    this.doctorId = doctorId;
+    this.yearsInPractice = yearsInPractice;
+    this.assignedPatients = new ArrayList<>();
+  }
 
-    public void setDateOfEmployment(LocalDate dateOfEmployment) {
-        this.dateOfEmployment = dateOfEmployment;
-    }
+  public String getSpecialty() {
+    return specialty;
+  }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
+  public void setSpecialty(String specialty) {
+    this.specialty = specialty;
+  }
 
-    public LocalDate getDateOfEmployment() {
-        return dateOfEmployment;
-    }
+  public int getDoctorId() {
+    return doctorId;
+  }
 
-    public String getSpeciality() {
-        return speciality;
-    }
+  public void setDoctorId(int doctorId) {
+    this.doctorId = doctorId;
+  }
 
-    @Override
-    public String toString() {
-        // not sure how y'all want to format this -JM
-        return " ";
-    }
+  public int getYearsInPractice() {
+    return yearsInPractice;
+  }
+
+  public void setYearsInPractice(int yearsInPractice) {
+    this.yearsInPractice = yearsInPractice;
+  }
+
+  public List<Patient> getAssignedPatients() {
+    return assignedPatients;
+  }
+
+  public void setAssignedPatients(List<Patient> assignedPatients) {
+    this.assignedPatients = assignedPatients;
+  }
+
+  @Override
+  public String toString() {
+      List<Patient> assignedPatients = getAssignedPatients();
+      
+      // Extract patient names
+      List<String> patientNames = assignedPatients.stream()
+              .map(Patient::getName)
+              .collect(Collectors.toList());
+              
+      return String.format("Doctor %s %n %s: %d %n %s: %s %n %s: %d %n %s: %s %n ", 
+            super.toString(),
+            "DoctorId", getDoctorId(),
+            "Specialty", getSpecialty(),
+            "YearsInPractice", getYearsInPractice(),
+            "AssignedPatients", String.join(", ", patientNames));
+  }
 }
