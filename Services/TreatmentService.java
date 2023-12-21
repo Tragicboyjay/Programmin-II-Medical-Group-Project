@@ -140,6 +140,8 @@ public class TreatmentService {
 
     treatments.add(treatment);
 
+    System.out.println("A new treatment No." + treatmentId + "has been registered!");
+
     return treatments;
   }
 }

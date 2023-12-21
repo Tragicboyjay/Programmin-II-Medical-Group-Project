@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +8,7 @@ import Classes.Invoice;
 import Classes.Nurse;
 import Classes.Patient;
 import Classes.Treatment;
+import Services.InvoiveService;
 import Services.PersonService;
 import Services.TreatmentService;
 
@@ -29,8 +29,8 @@ public class MyClinic {
                            + "8: Quit.\n"
                            + "Please enter number 1-8 to choose your option: ";
 
-    String INPUT_OPTION = "Enter 1 to input data from file, enter 2 to input data manually, enter 3 to quit: ";   
-    String OUTPUT_OPTION = "Enter 1 for patients, 2 for doctors, 3 for nurses to output the updated data.";                     
+    String INPUT_OPTION = "Enter 1 to input data from file, enter 2 to input data manually: ";   
+    String OUTPUT_OPTION = "Enter 1 for patients, 2 for doctors, 3 for nurses to output the updated data. Enter 4 to print invoice.";                     
 
 
     System.out.print(WELCOME_MESSAGE);
@@ -120,12 +120,12 @@ public class MyClinic {
         break;
 
       case 6:
-      if (treatments.isEmpty()) {
+        if (treatments.isEmpty()) {
           System.out.println("There is no treatment data in the system. Please input treatment first. ");
           System.out.println();
           break;
         }
-        // to be added: function of invoiceService
+        InvoiveService.creatInvoice(invoice, patients);
         break;
       case 7:
         System.out.print(OUTPUT_OPTION);

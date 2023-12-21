@@ -10,18 +10,24 @@ public class Invoice {
   private double medicationPricePerUnit;
   private boolean diagnosticTest;
   private double diagnosticTestFee;
+  private double insurancCoverage;
   private double totalAmount;
   private LocalDateTime creationTimestamp;
+
+  public Invoice() {}
   
-  public Invoice(int invoiceId, String payorName, double registrationFee, int medicationUnit, double medicationPricePerUnit,
-      double diagnosticTestFee, LocalDateTime creationTimestamp) {
+  public Invoice(int invoiceId, String payorName, double registrationFee, int medicationUnit, double medicationPricePerUnit, boolean diagnosticTest,
+      double diagnosticTestFee, double insurancCoverage) {
     setInvoiceId(invoiceId);
     this.payorName = payorName;
     setRegistrationFee(registrationFee);
     setMedicationUnit(medicationUnit);
-    setMedicationFee(medicationPricePerUnit);
+    setMedicationPricePerUnit(medicationPricePerUnit);
+    this.diagnosticTest = diagnosticTest;
     setDiagnosticTestFee(diagnosticTestFee);
+    this.insurancCoverage = insurancCoverage;
     setCreationTimestamp();
+    setTotalAmount();
   }
 
   public int getInvoiceId() {
@@ -68,7 +74,7 @@ public class Invoice {
     return medicationPricePerUnit;
   }
 
-  public void setMedicationFee(double medicationPricePerUnit) {
+  public void setMedicationPricePerUnit(double medicationPricePerUnit) {
     if (medicationPricePerUnit < 0) {
       throw new IllegalArgumentException("MedicationPricePerUnit must be greater than zero");
     }
@@ -80,8 +86,8 @@ public class Invoice {
   }
 
   public void setDiagnosticTestFee(double diagnosticTestFee) {
-    if (diagnosticTestFee < 0) {
-      throw new IllegalArgumentException("DiagnosticTestFee must be greater than zero");
+    if (!isDiagnosticTest()) {
+      this.diagnosticTestFee = 0;
     }
     this.diagnosticTestFee = diagnosticTestFee;
   }
@@ -94,11 +100,20 @@ public class Invoice {
     this.diagnosticTest = diagnosticTest;
   }
 
-  public double getTotalAmout() {
-    if (!isDiagnosticTest()) {
-      return this.totalAmount = getRegistrationFee() + getMedicationPricePerUnit() * getMedicationUnit();
-    }
-    return this.totalAmount = getRegistrationFee() + getMedicationPricePerUnit() * getMedicationUnit() + getDiagnosticTestFee();
+  public double getInsurancCoverage() {
+    return insurancCoverage;
+  }
+
+  public void setInsurancCoverage(double insurancCoverage) {
+    this.insurancCoverage = insurancCoverage;
+  }
+
+  public double getTotalAmount() {
+    return totalAmount;
+  }
+
+  public void setTotalAmount() {
+    this.totalAmount = (getRegistrationFee() + getMedicationPricePerUnit() * getMedicationUnit() + getDiagnosticTestFee()) * (1 - getInsurancCoverage()/100);
   }
 
   public LocalDateTime getCreationTimestamp() {
@@ -107,5 +122,19 @@ public class Invoice {
 
   public void setCreationTimestamp() {
     this.creationTimestamp = LocalDateTime.now();
+  }
+
+  @Override
+  public String toString() {
+      return String.format("%s%d%n %s%s%n %s%,.2f%n %s%d%n %s%,.2f%n %s%,.2f%n %s%,.2f%%%n %s%,.2f%n %s%s%n",
+              "InvoiceId: ", getInvoiceId(),
+              "Payor: ", getPayorName(),
+              "Registration fee: $", getRegistrationFee(),
+              "Medication unit: ", getMedicationUnit(),
+              "Medication fee: $", getMedicationUnit() * getMedicationPricePerUnit(),
+              "Diagnostic test fee: $", getDiagnosticTestFee(),
+              "Insuranc Coverage: ", getInsurancCoverage(),
+              "Total amount: $", getTotalAmount(),
+              "Invoice created on ", getCreationTimestamp());
   }
 }

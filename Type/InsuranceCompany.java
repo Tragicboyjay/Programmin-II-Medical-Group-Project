@@ -1,7 +1,8 @@
+package Type;
 public enum InsuranceCompany {
-    COMPANY_A("Company A", 0.85),
-    COMPANY_B("Company B", 0.90),
-    COMPANY_C("Company C", 0.80);
+    COMPANY_A("Company A", 85),
+    COMPANY_B("Company B", 90),
+    COMPANY_C("Company C", 80);
 
     private final String companyName;
     private final double coverRate;
