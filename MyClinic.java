@@ -18,7 +18,7 @@ public class MyClinic {
     int input;
     int inputCase;
     String temp = "";
-    String WELCOME_MESSAGE = "Welcom to XXX Clinic!\n"
+    String WELCOME_MESSAGE = "Welcom to TEAM3 Clinic!\n"
                            + "1: Create patients.\n"
                            + "2: Create Doctors.\n"
                            + "3: Create Nurses.\n"
