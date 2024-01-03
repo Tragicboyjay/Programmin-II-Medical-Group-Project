@@ -3,11 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Classes.Appointment;
 import Classes.Doctor;
 import Classes.Invoice;
 import Classes.Nurse;
 import Classes.Patient;
 import Classes.Treatment;
+import Services.AppointmentService;
 import Services.InvoiveService;
 import Services.PersonService;
 import Services.TreatmentService;
@@ -15,7 +17,7 @@ import Services.TreatmentService;
 public class MyClinic {
   static Scanner console = new Scanner(System.in);
   public static void main(String[] args) throws FileNotFoundException {
-    int input;
+    int input = 0;
     int inputCase;
     String temp = "";
     String WELCOME_MESSAGE = "Welcom to TEAM3 Clinic!\n"
@@ -32,19 +34,19 @@ public class MyClinic {
     String INPUT_OPTION = "Enter 1 to input data from file, enter 2 to input data manually: ";   
     String OUTPUT_OPTION = "Enter 1 for patients, 2 for doctors, 3 for nurses to output the updated data. Enter 4 to print invoice.";                     
 
-
-    System.out.print(WELCOME_MESSAGE);
-    input = console.nextInt();
-    System.out.println();
-
     List<Patient> patients = new ArrayList<>();
     List<Doctor> doctors = new ArrayList<>();
     List<Nurse> nurses = new ArrayList<>();
     List<Treatment> treatments = new ArrayList<>();
     List<Invoice> invoice = new ArrayList<>();
+    List<Appointment> appointments = new ArrayList<>();
 
 
     while(input != 8){
+      System.out.print(WELCOME_MESSAGE);
+      input = console.nextInt();
+      System.out.println();
+
       switch(input)
       {
       case 1:
@@ -100,7 +102,7 @@ public class MyClinic {
           System.out.println("There is no " + temp + " Please input data first.");
           break;
         }
-        // to be added: function of appointmentService
+        appointments = AppointmentService.creatAppointments(appointments, patients, doctors);
         break;
 
       case 5:
@@ -145,9 +147,6 @@ public class MyClinic {
           }
         break;
       }
-      System.out.print(WELCOME_MESSAGE);
-      input = console.nextInt();
-      System.out.println();
     }
     console.close();
     System.out.println("Presentation finished. Thank you!");

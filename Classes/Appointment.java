@@ -67,4 +67,10 @@ public class Appointment {
   public void setCreationTimestamp() {
     this.creationTimestamp = LocalDateTime.now();
   }
+
+  @Override 
+  public String toString() {
+      return String.format("AppointmentId: %d %nPatient Name: %s%nDoctor Name: %s%nphone number: %s%nAppointment Date: %s%nAppointment created on :%s%n"
+      , getAppointmentId(), getPatientName(), getDoctorName(), getPhone(), getDate(), getCreationTimestamp());
+  }
 }

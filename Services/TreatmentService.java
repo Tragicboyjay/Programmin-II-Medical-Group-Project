@@ -2,6 +2,7 @@ package Services;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ import Classes.Treatment;
 public class TreatmentService {
   static Scanner console = new Scanner(System.in);
   public static List<Treatment> creatTreatment(List<Treatment> treatments, List<Patient> patients, List<Doctor> doctors, List<Nurse> nurses) {
-    int treatmentId;
+    int treatmentId = treatments.size();
     String patientName = "";
     String doctorName = "";
     String nurseName = "";
@@ -21,7 +22,6 @@ public class TreatmentService {
     LocalDate startDate;
     LocalDate endDate;
     boolean diagnosticTest;
-    int i = treatments.size();
     boolean found = false;
     String dateString;
     List<Patient> assignedPatients = new ArrayList<>();
@@ -30,15 +30,16 @@ public class TreatmentService {
     Patient patient = new Patient();
     Doctor doctor = new Doctor();
 
-    // Chech whether the patient exist in the record.
+    // Chech whether the patient exists in the record.
     while (!found) {
       System.out.print("Please enter the name of the patient: ");
       patientName = console.nextLine();
 
       for (Patient o : patients) {
-          if (o.getName().equals(patientName)) {
+          if (o.getName().equalsIgnoreCase(patientName)) {
               found = true;
               patient = o;
+              patientName = o.getName();
               treatmentOfPatient = o.getTreatments();
               break;
           }
@@ -50,15 +51,16 @@ public class TreatmentService {
     }
 
     found = false;
-
+    // Chech whether the doctor exists in the record.
     while (!found) {
       System.out.print("Please enter the name of the doctor: ");
       doctorName = console.nextLine();
 
       for (Doctor o : doctors) {
-          if (o.getName().equals(doctorName)) {
+          if (o.getName().equalsIgnoreCase(doctorName)) {
               found = true;
               doctor = o;
+              doctorName = o.getName();
               assignedPatients = doctor.getAssignedPatients();
               break;
           }
@@ -70,14 +72,15 @@ public class TreatmentService {
     }
 
     found = false;
-
+    // Chech whether the nurse exists in the record.
     while (!found) {
       System.out.print("Please enter the name of the nurse: ");
       nurseName = console.nextLine();
 
       for (Nurse o : nurses) {
-          if (o.getName().equals(nurseName)) {
+          if (o.getName().equalsIgnoreCase(nurseName)) {
               found = true;
+              nurseName = o.getName();
               break;
           }
       }
@@ -86,47 +89,58 @@ public class TreatmentService {
           System.out.println("Nurse not found. Please enter a valid name.");
       }
     }
-
+    // Input treatment description
     System.out.print("Please enter treatment description: ");
     treatmentDescription = console.nextLine();
 
     // Input start date with correct format
     while (true) {
-      System.out.print("Please enter treatment start Date (yyyy-MM-dd): ");
-      dateString = console.nextLine();
 
       try {
-          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        System.out.print("Please enter treatment start Date (yyyy-MM-dd): ");
+        dateString = console.nextLine();
 
-          startDate = LocalDate.parse(dateString, formatter);
-          break;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        startDate = LocalDate.parse(dateString, formatter);
+        break;
 
       } catch (Exception e) {
-          System.out.println("Invalid date format. Please enter the date in yyyy-MM-dd format.");
+          System.out.println("Invalid date format. ");
       }
     }
 
     // Input end date with correct format
     while (true) {
-      System.out.print("Please enter treatment end Date (yyyy-MM-dd): ");
-      dateString = console.nextLine();
-
+      
       try {
-          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        System.out.print("Please enter treatment end Date (yyyy-MM-dd): ");
+        dateString = console.nextLine();
 
-          endDate = LocalDate.parse(dateString, formatter);
-          break;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        endDate = LocalDate.parse(dateString, formatter);
+        break;
 
       } catch (Exception e) {
-          System.out.println("Invalid date format. Please enter the date in yyyy-MM-dd format.");
+          System.out.println("Invalid date format. ");
       }
     }
 
-    System.out.print("Does the patient need diagnostic test?(true or false) ");
-    diagnosticTest = console.nextBoolean();
-    System.out.println();
+    // Input diagnosticTest with correct format
+    while (true) {
+      
+      try {
+        System.out.print("Does the patient need diagnostic test?(true or false) ");
+        diagnosticTest = console.nextBoolean();
+        System.out.println();
+        break;
+      } catch (InputMismatchException e) {
+        System.out.printf("You must enter true or false. Please try again.%n%n");
+      }
+    }
 
-    treatmentId = i++;
+    treatmentId ++;
 
     Treatment treatment = new Treatment(treatmentId, patientName, doctorName, nurseName, treatmentDescription, startDate, endDate, diagnosticTest);
     // Update patient information by adding attending doctor and treatment
