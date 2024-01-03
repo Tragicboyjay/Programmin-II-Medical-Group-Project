@@ -72,9 +72,9 @@ public class Doctor extends Person {
               .map(Patient::getName)
               .collect(Collectors.toList());
               
-      return String.format("Doctor %s %n %s: %d %n %s: %s %n %s: %d %n %s: %s %n ", 
-            super.toString(),
+      return String.format("%s: %d %n%s%s: %s %n%s: %d %n%s: %s %n", 
             "DoctorId", getDoctorId(),
+            super.toString(),
             "Specialty", getSpecialty(),
             "YearsInPractice", getYearsInPractice(),
             "AssignedPatients", String.join(", ", patientNames));

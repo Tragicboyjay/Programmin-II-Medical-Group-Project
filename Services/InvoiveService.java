@@ -95,7 +95,7 @@ public class InvoiveService {
       print = console.next();
 
       if(print.equalsIgnoreCase("Y")){
-        printInvoice(invoceList, payorName);
+        printInvoiceOfPerson(invoceList, payorName);
       }
     }
 
@@ -103,15 +103,31 @@ public class InvoiveService {
   }
 
   // Method to print the invoice out both on screen and export as txt file
-  public static void printInvoice(List<Invoice> invoiceList, String payorName) throws FileNotFoundException {
+  public static void printInvoice(List<Invoice> invoiceList) throws FileNotFoundException {
     PrintWriter outFile;
-    String fileName = "Invoice_" + payorName + ".txt";
+    String fileName = "Invoice.txt";
     outFile = new PrintWriter(fileName);
     for (Invoice invoice : invoiceList) {
       outFile.println(invoice);
       outFile.println();
       System.out.println(invoice);
       System.out.println();
+    }
+    System.out.println("Invoice is exported as " + fileName);
+    outFile.close();
+  }
+
+  public static void printInvoiceOfPerson(List<Invoice> invoiceList, String payorName) throws FileNotFoundException {
+    PrintWriter outFile;
+    String fileName = "Invoice_" + payorName + ".txt";
+    outFile = new PrintWriter(fileName);
+    for (Invoice invoice : invoiceList) {
+      if(payorName.equalsIgnoreCase(invoice.getPayorName())){
+        outFile.println(invoice);
+        outFile.println();
+        System.out.println(invoice);
+        System.out.println();
+      }
     }
     System.out.println("Invoice is exported as " + fileName);
     outFile.close();

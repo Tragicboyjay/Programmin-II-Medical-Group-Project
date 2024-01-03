@@ -179,6 +179,11 @@ public class MyClinic {
             case 4:
               AppointmentService.printOutAppointments(appointments);
               break;
+            case 5:
+              TreatmentService.printOutTreatments(treatments);
+            case 6:
+              InvoiveService.printInvoice(invoice);
+              break;
           }
         break;
       }

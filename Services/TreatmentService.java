@@ -1,4 +1,6 @@
 package Services;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -6,6 +8,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import Classes.Appointment;
 import Classes.Doctor;
 import Classes.Nurse;
 import Classes.Patient;
@@ -157,5 +160,16 @@ public class TreatmentService {
     System.out.println("A new treatment No." + treatmentId + "has been registered!");
 
     return treatments;
+  }
+
+  public static void printOutTreatments(List<Treatment> treatments) throws FileNotFoundException {
+    PrintWriter outFile;
+    outFile = new PrintWriter("Treatments_of_Clinic.txt");
+    for (Treatment treatment : treatments) {
+      outFile.println(treatment);
+      System.out.println(treatment);
+    }
+    System.out.println("Please find the updated data in Treatments_of_Clinic.txt");
+    outFile.close();
   }
 }

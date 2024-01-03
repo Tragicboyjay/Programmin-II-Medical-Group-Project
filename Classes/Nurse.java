@@ -44,9 +44,9 @@ public class Nurse extends Person {
 
   @Override
   public String toString() {
-      return String.format("Nurse %s %n %s: %d %n %s: %d %n %s: %s %n ", 
-            super.toString(),
+      return String.format("%s: %d %n%s%s: %d %n%s: %s %n", 
             "NurseId", getNurseId(),
+            super.toString(),
             "YearsInPractice", getYearsInPractice(),
             "Skill", getSkill());
   }

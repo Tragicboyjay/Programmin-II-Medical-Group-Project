@@ -96,9 +96,9 @@ public class Patient extends Person {
               .map(Object::toString)
               .collect(Collectors.toList());
   
-      return String.format("Patient %s%n %s: %d%n %s: %s%n %s: %s%n %s: %s%n %s: %s%n %s: %s%n",
-              super.toString(),
+      return String.format("%s: %d%n%s%s: %s%n%s: %s%n%s: %s%n%s: %s%n%s: %s%n",
               "PatientId", getPatientId(),
+              super.toString(),
               "Gender", getGender(),
               "MedicalRecords", getMedicalRecords(),
               "CurrentSymptoms", getCurrentSymptoms(),

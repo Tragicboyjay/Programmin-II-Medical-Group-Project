@@ -2,7 +2,7 @@ package Classes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 public class Treatment {
   private int treatmentId;
@@ -94,8 +94,8 @@ public class Treatment {
   }
 
   public void setMedicationUnit() {
-    Period period = Period.between(getStartDate(), getEndDate());
-    this.medicationUnit = period.getDays();
+    long daysBetween = ChronoUnit.DAYS.between(getStartDate(), getEndDate());
+    this.medicationUnit = (int) daysBetween;
   }
 
   public boolean isDiagnosticTest() {
@@ -112,5 +112,10 @@ public class Treatment {
 
   public void setCreationTimestamp() {
     this.creationTimestamp = LocalDateTime.now();
+  }
+
+  public String toString() {
+    return String.format("TreatmentId: %d %nPatient Name: %s%nDoctor Name: %s%nNurse Name: %s%nTreatment description: %s%nStart Date: %s%nEnd Date: %s%nMedical unit: %d%nDiagnostic test: %s%nTreatment created on :%s%n"
+    , getTreatmentId(), getPatient(), getDoctor(), getNurse(), getTreatmentDescription(), getStartDate(), getEndDate(), getMedicationUnit(), isDiagnosticTest(), getCreationTimestamp());
   }
 }
