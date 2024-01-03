@@ -1,5 +1,7 @@
 package Services;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -96,6 +98,17 @@ public class AppointmentService {
     System.out.println(appointment);
 
     return appointments;
+  }
+
+  public static void printOutAppointments(List<Appointment> appointments) throws FileNotFoundException {
+    PrintWriter outFile;
+    outFile = new PrintWriter("Appointments_of_Clinic.txt");
+    for (Appointment appointment : appointments) {
+      outFile.println(appointment);
+      System.out.println(appointment);
+    }
+    System.out.println("Please find the updated data in Appointments_of_Clinic.txt");
+    outFile.close();
   }
   
 }

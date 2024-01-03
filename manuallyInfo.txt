@@ -1,0 +1,25 @@
+Patient
+---------
+Alice White
+1995-08-22
+123 Oak St
+555-123-4567
+Female
+Allergies to pollen
+Runny nose, Sneezing
+No insurance company
+
+
+Doctor
+---------
+
+
+
+Nurse
+---------
+Nancy Johnson
+1975-05-20
+123 Oak St
+555-555-5555
+8
+Pediatrics

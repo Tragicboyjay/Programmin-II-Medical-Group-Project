@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,22 +18,47 @@ import Services.TreatmentService;
 public class MyClinic {
   static Scanner console = new Scanner(System.in);
   public static void main(String[] args) throws FileNotFoundException {
-    int input = 0;
-    int inputCase;
+    boolean continueLoop = true;
+    do{
+      try{
+        mainMenu();
+        continueLoop = false;
+      } catch (InputMismatchException e){
+        console.nextLine();
+        System.out.println();
+        System.out.printf("------Please chose a number------%n%n");
+      }
+
+    } while (continueLoop);
+  }
+
+  public static void mainMenu() throws FileNotFoundException {
+    int firstLevelOption = 0;
+    int secondLevelOption;
     String temp = "";
-    String WELCOME_MESSAGE = "Welcom to TEAM3 Clinic!\n"
-                           + "1: Create patients.\n"
-                           + "2: Create Doctors.\n"
-                           + "3: Create Nurses.\n"
-                           + "4: Create an appointment.\n"
-                           + "5: Create a treatment.\n"
-                           + "6: Generate invoice.\n"
-                           + "7: Print out.\n"
-                           + "8: Quit.\n"
+    String WELCOME_MESSAGE = "=======================\n"
+                           + "Welcom to TEAM3 Clinic!\n"
+                           + "=======================\n"
+                           + "Enter request\n"
+                           + "1 - Create patients.\n"
+                           + "2 - Create Doctors.\n"
+                           + "3 - Create Nurses.\n"
+                           + "4 - Create an appointment.\n"
+                           + "5 - Create a treatment.\n"
+                           + "6 - Generate invoice.\n"
+                           + "7 - Export data.\n"
+                           + "8 - Quit.\n"
                            + "Please enter number 1-8 to choose your option: ";
 
-    String INPUT_OPTION = "Enter 1 to input data from file, enter 2 to input data manually: ";   
-    String OUTPUT_OPTION = "Enter 1 for patients, 2 for doctors, 3 for nurses to output the updated data. Enter 4 to print invoice.";                     
+    String INPUT_OPTIONS = "Enter 1 to input data from file, enter 2 to input data manually: ";   
+    String OUTPUT_OPTIONS = "Enter request\n"
+                           + "1 - Print patients list.\n"
+                           + "2 - Print Doctors list.\n"
+                           + "3 - Print Nurses list.\n"
+                           + "4 - Print appointments list.\n"
+                           + "5 - Print treatment list.\n"
+                           + "6 - Print invoice.\n"
+                           + "Please enter number 1-6 to choose your option or press any key to go back to previous menu: ";                 
 
     List<Patient> patients = new ArrayList<>();
     List<Doctor> doctors = new ArrayList<>();
@@ -42,60 +68,63 @@ public class MyClinic {
     List<Appointment> appointments = new ArrayList<>();
 
 
-    while(input != 8){
+    while(firstLevelOption != 8){
       System.out.print(WELCOME_MESSAGE);
-      input = console.nextInt();
+      firstLevelOption = console.nextInt();
       System.out.println();
 
-      switch(input)
+      switch(firstLevelOption)
       {
       case 1:
-        // Choose input from file or manually
-        System.out.print(INPUT_OPTION);
-        inputCase = console.nextInt();
+        // Select patient information: either input from a file or enter manually.
+        System.out.print(INPUT_OPTIONS);
+        secondLevelOption = console.nextInt();
         System.out.println();
-          switch(inputCase)
-          {
-            case 1:
-              patients = PersonService.creatPatientsFromFile(patients);
-              break;
-            case 2:
-              // to be added: function of input doctors patients manually
-              break;
-          }
+        switch(secondLevelOption)
+        {
+          case 1:
+            patients = PersonService.creatPatientsFromFile(patients);
+            break;
+          case 2:
+            patients = PersonService.creatPatientsManually(patients);
+            break;
+        }
         break;
         
       case 2:
-        System.out.print(INPUT_OPTION);
-        inputCase = console.nextInt();
+        // Select doctor information: either input from a file or enter manually.
+        System.out.print(INPUT_OPTIONS);
+        secondLevelOption = console.nextInt();
         System.out.println();
-          switch(inputCase)
-          {
-            case 1:
-              doctors = PersonService.creatDoctorsFromFile(doctors);
-              break;
-            case 2:
-              // to be added: function of input doctors data manually
-              break;
-          }
+        switch(secondLevelOption)
+        {
+          case 1:
+            doctors = PersonService.creatDoctorsFromFile(doctors);
+            break;
+          case 2:
+            // to be added: function of input doctors data manually
+            break;
+        }
         break;
 
       case 3:
-        System.out.print(INPUT_OPTION);
-        inputCase = console.nextInt();
+        // Select nurse information: either input from a file or enter manually.
+        System.out.print(INPUT_OPTIONS);
+        secondLevelOption = console.nextInt();
         System.out.println();
-          switch(inputCase)
-          {
-            case 1:
-              nurses = PersonService.creatNursesFromFile(nurses);
-              break;
-            case 2:
-              // to be added: function of input nurse data manually
-              break;
-          }
+        switch(secondLevelOption)
+        {
+          case 1:
+            nurses = PersonService.creatNursesFromFile(nurses);
+            break;
+          case 2:
+            // to be added: function of input nurse data manually
+            break;
+        }
         break;
 
       case 4:
+        // Create appointment
         if (patients.isEmpty() || doctors.isEmpty()) {
           temp = patients.isEmpty() ? "patient data, " : "";
           temp += doctors.isEmpty() ? "doctor data, " : "";
@@ -106,6 +135,7 @@ public class MyClinic {
         break;
 
       case 5:
+        // Create treatment
         System.out.println("Patients size: " + patients.size());
         System.out.println("Doctors size: " + doctors.size());
         System.out.println("Nurses size: " + nurses.size());
@@ -122,6 +152,7 @@ public class MyClinic {
         break;
 
       case 6:
+        // Create invoice
         if (treatments.isEmpty()) {
           System.out.println("There is no treatment data in the system. Please input treatment first. ");
           System.out.println();
@@ -130,10 +161,11 @@ public class MyClinic {
         InvoiveService.creatInvoice(invoice, patients);
         break;
       case 7:
-        System.out.print(OUTPUT_OPTION);
-        inputCase = console.nextInt();
+        // Export data
+        System.out.print(OUTPUT_OPTIONS);
+        secondLevelOption = console.nextInt();
         System.out.println();
-          switch(inputCase)
+          switch(secondLevelOption)
           {
             case 1:
               PersonService.printOutPatients(patients);
@@ -144,12 +176,15 @@ public class MyClinic {
             case 3:
               PersonService.printOutNurses(nurses);
               break;
+            case 4:
+              AppointmentService.printOutAppointments(appointments);
+              break;
           }
         break;
       }
     }
     console.close();
-    System.out.println("Presentation finished. Thank you!");
+    System.out.println("Thank you or using TEAM3 Clinic system!");
     System.out.println();
   }
   

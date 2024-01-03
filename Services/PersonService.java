@@ -3,8 +3,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
+
+import static Type.InsuranceCompany.COMPANY_A;
+import static Type.InsuranceCompany.COMPANY_B;
+import static Type.InsuranceCompany.COMPANY_C;
 
 import Classes.Doctor;
 import Classes.Nurse;
@@ -66,6 +71,7 @@ public class PersonService {
       Patient patient = new Patient(name, birthDate, address, phone, id, gender, medicalRecords, currentSymptoms, insuranceCompany);
 
       patients.add(patient);
+      updatePatients(patients);
       System.out.println("A new patient added!");
       System.out.println();
     }
@@ -117,6 +123,7 @@ public class PersonService {
 
       Doctor doctor = new Doctor(name, birthDate, address, phone, id, specialty, yearsInPractice);
       doctors.add(doctor);
+      updateDoctors(doctors);
       System.out.println("A new doctor added!");
       System.out.println();
     }
@@ -170,6 +177,7 @@ public class PersonService {
       Nurse nurse = new Nurse(name, birthDate, address, phone, id, yearsInPractice, skill);
 
       nurses.add(nurse);
+      updateNurses(nurses);
       System.out.println("A new nurse added!");
       System.out.println();
     }
@@ -207,34 +215,164 @@ public class PersonService {
   // Print the data out and export to txt file
   public static void printOutPatients(List<Patient> patients) throws FileNotFoundException {
     PrintWriter outFile;
-    outFile = new PrintWriter("updatedPatients.txt");
+    outFile = new PrintWriter("Patients_of_Clinic.txt");
     for (Patient patient : patients) {
       outFile.println(patient);
       System.out.println(patient);
     }
-    System.out.println("Please find the updated data in updatedPatients.txt");
+    System.out.println("Please find the updated data in Patients_of_Clinic.txt");
+    outFile.close();
+  }
+
+  public static void updatePatients(List<Patient> patients) throws FileNotFoundException {
+    PrintWriter outFile;
+    outFile = new PrintWriter("patients.txt");
+    for (Patient patient : patients) {
+      outFile.println(patient.getName());
+      outFile.println(patient.getBirthDate());
+      outFile.println(patient.getAddress());
+      outFile.println(patient.getPhone());
+      outFile.println(patient.getGender());
+      outFile.println(patient.getMedicalRecords());
+      outFile.println(patient.getCurrentSymptoms());
+      outFile.println(patient.getInsuranceCompany());
+    }
     outFile.close();
   }
 
   public static void printOutDoctors(List<Doctor> doctors) throws FileNotFoundException {
     PrintWriter outFile;
-    outFile = new PrintWriter("updatedDoctors.txt");
+    outFile = new PrintWriter("Doctors_of_Clinic.txt");
     for (Doctor doctor : doctors) {
       outFile.println(doctor);
       System.out.println(doctor);
     }
-    System.out.println("Please find the updated data in updatedDoctors.txt");
+    System.out.println("Please find the updated data in Doctors_of_Clinic.txt");
+    outFile.close();
+  }
+
+  public static void updateDoctors(List<Doctor> doctors) throws FileNotFoundException {
+    PrintWriter outFile;
+    outFile = new PrintWriter("doctors.txt");
+    for (Doctor doctor : doctors) {
+      outFile.println(doctor.getName());
+      outFile.println(doctor.getBirthDate());
+      outFile.println(doctor.getAddress());
+      outFile.println(doctor.getPhone());
+      outFile.println(doctor.getSpecialty());
+      outFile.println(doctor.getYearsInPractice());
+    }
     outFile.close();
   }
 
   public static void printOutNurses(List<Nurse> nurses) throws FileNotFoundException {
     PrintWriter outFile;
-    outFile = new PrintWriter("updatedNurses.txt");
+    outFile = new PrintWriter("Nurses_of_Clinic.txt");
     for (Nurse nurse : nurses) {
       outFile.println(nurse);
       System.out.println(nurse);
     }
-    System.out.println("Please find the updated data in updatedNursers.txt");
+    System.out.println("Please find the updated data in Nurses_of_Clinic.txt");
     outFile.close();
+  }
+
+  public static void updateNurses(List<Nurse> nurses) throws FileNotFoundException {
+    PrintWriter outFile;
+    outFile = new PrintWriter("nurses.txt");
+    for (Nurse nurse : nurses) {
+      outFile.println(nurse.getName());
+      outFile.println(nurse.getBirthDate());
+      outFile.println(nurse.getAddress());
+      outFile.println(nurse.getPhone());
+      outFile.println(nurse.getYearsInPractice());
+      outFile.println(nurse.getSkill());
+    }
+    outFile.close();
+  }
+
+  // Create patient manually
+  public static List<Patient> creatPatientsManually(List<Patient> patients) throws FileNotFoundException {
+    String name;
+    int id = patients.size();
+    LocalDate birthDate;
+    String address;
+    String phone;
+    String gender;
+    String medicalRecords;
+    String currentSymptoms;
+    String insuranceCompany;
+    int choice = 0;
+    String NO_INSURANCE_COMPANY = "No insurance company";
+    String dateString;
+
+    System.out.print("Enter patient name: ");
+    name = console.nextLine();
+    
+    while (true) {
+      
+      try {
+        System.out.print("Enter patient's birthDate (yyyy-MM-dd): ");
+        dateString = console.nextLine();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        birthDate = LocalDate.parse(dateString, formatter);
+        break;
+
+      } catch (Exception e) {
+          System.out.println("Invalid date format. ");
+      }
+    }
+
+    // Compare with existing patients to avoid duplication
+    if(patientComparator(patients, name, birthDate)){
+      System.out.println("------This patient is already exist------");
+      System.out.println();
+      return patients;
+    }
+    
+    System.out.print("Enter patient's address: ");
+    address = console.nextLine();
+    
+    System.out.print("Enter patient's phone number: ");
+    phone = console.nextLine();
+
+    System.out.print("Enter patient's gender: ");
+    gender = console.nextLine();
+
+    System.out.print("Enter patient's medicalRecords: ");
+    medicalRecords = console.nextLine();
+
+    System.out.print("Enter patient's currentSymptoms: ");
+    currentSymptoms = console.nextLine();
+
+    System.out.printf("Chose patient's insuranceCompany: %n1 - %s%n2 - %s%n3 - %s%n4 - %s%n",
+                      COMPANY_A.getCompanyName(), COMPANY_B.getCompanyName(), COMPANY_C.getCompanyName(), NO_INSURANCE_COMPANY);
+    choice = console.nextInt();
+    switch (choice) {
+      case (1):
+        insuranceCompany = COMPANY_A.getCompanyName();
+        break;
+      case (2):
+        insuranceCompany = COMPANY_B.getCompanyName();
+        break;
+      case (3):
+        insuranceCompany = COMPANY_C.getCompanyName();
+        break;
+      default:
+        insuranceCompany = NO_INSURANCE_COMPANY;
+        break;
+    }
+
+    id++;
+
+    Patient patient = new Patient(name, birthDate, address, phone, id, gender, medicalRecords, currentSymptoms, insuranceCompany);
+
+    patients.add(patient);
+    updatePatients(patients);
+    System.out.println("A new patient added!");
+    System.out.println();
+
+    return patients;
   }
 }
