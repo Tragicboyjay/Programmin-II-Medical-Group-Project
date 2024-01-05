@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class InvoiveService {
   static Scanner console = new Scanner(System.in);
-  public static List<Invoice> creatInvoice(List<Invoice> invoceList, List<Patient> patients) throws FileNotFoundException {
+  public static void creatInvoice(List<Invoice> invoceList, List<Patient> patients) throws FileNotFoundException {
     int invoiceId = invoceList.size();
     String payorName = "";
     double registrationFee;
@@ -98,8 +98,6 @@ public class InvoiveService {
         printInvoiceOfPerson(invoceList, payorName);
       }
     }
-
-    return invoceList;
   }
 
   // Method to print the invoice out both on screen and export as txt file

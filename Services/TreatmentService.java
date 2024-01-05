@@ -15,7 +15,7 @@ import Classes.Treatment;
 
 public class TreatmentService {
   static Scanner console = new Scanner(System.in);
-  public static List<Treatment> creatTreatment(List<Treatment> treatments, List<Patient> patients, List<Doctor> doctors, List<Nurse> nurses) {
+  public static void creatTreatment(List<Treatment> treatments, List<Patient> patients, List<Doctor> doctors, List<Nurse> nurses) {
     int treatmentId = treatments.size();
     String patientName = "";
     String doctorName = "";
@@ -156,9 +156,7 @@ public class TreatmentService {
 
     treatments.add(treatment);
 
-    System.out.println("A new treatment No." + treatmentId + "has been registered!");
-
-    return treatments;
+    System.out.printf("%nA new treatment No.%d has been registered!%n",  treatmentId);
   }
 
   public static void printOutTreatments(List<Treatment> treatments) throws FileNotFoundException {
@@ -168,7 +166,7 @@ public class TreatmentService {
       outFile.println(treatment);
       System.out.println(treatment);
     }
-    System.out.println("Please find the updated data in Treatments_of_Clinic.txt");
+    System.out.printf("%nPlease find the updated data in Treatments_of_Clinic.txt%n");
     outFile.close();
   }
 }
