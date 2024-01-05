@@ -1,3 +1,11 @@
+/**
+ * Team 3 Clinic System Demo 
+ * 
+ * @version 1.0
+ * @since 2023-01-05
+ * @author Team3 (Fei Li, Timothy Lazurka, Justice Manly, Jie Li)
+ */
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -181,6 +189,7 @@ public class MyClinic {
               break;
             case 5:
               TreatmentService.printOutTreatments(treatments);
+              break;
             case 6:
               InvoiveService.printInvoice(invoice);
               break;

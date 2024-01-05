@@ -8,7 +8,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import Classes.Appointment;
 import Classes.Doctor;
 import Classes.Nurse;
 import Classes.Patient;
