@@ -198,7 +198,7 @@ public class MyClinic {
       }
     }
     console.close();
-    System.out.println("Thank you or using TEAM3 Clinic system!");
+    System.out.println("Thank you for using TEAM 3 Clinic system!");
     System.out.println();
   }
   

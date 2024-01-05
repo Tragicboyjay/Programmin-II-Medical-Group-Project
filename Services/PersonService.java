@@ -187,7 +187,7 @@ public class PersonService {
       System.out.println("Read skill: " + skill);
 
       if(nurseComparator(nurses, name, birthDate)){
-        System.out.println("%n------This nurse is already registered in the system------%n%n");
+        System.out.printf("%n------This nurse is already registered in the system------%n%n");
         continue;
       }
 
