@@ -14,7 +14,7 @@ import Classes.Patient;
 public class AppointmentService {
   static Scanner console = new Scanner(System.in);
 
-  public static List<Appointment> creatAppointments(List<Appointment> appointments, List<Patient> patients, List<Doctor> doctors) {
+  public static void creatAppointments(List<Appointment> appointments, List<Patient> patients, List<Doctor> doctors) {
     int appointmentId = appointments.size();
     String patientName = "";
     String doctorName = "";
@@ -96,8 +96,6 @@ public class AppointmentService {
     System.out.println("A new appointment created.");
     System.out.println("==========================");
     System.out.println(appointment);
-
-    return appointments;
   }
 
   public static void printOutAppointments(List<Appointment> appointments) throws FileNotFoundException {

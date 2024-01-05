@@ -26,7 +26,7 @@ public class PersonService {
    * @return The updated list of patients after adding patients from the file.
    * @throws FileNotFoundException If the file is not found or there is an issue with file operations.
    */
-  public static List<Patient> creatPatientsFromFile(List<Patient> patients) throws FileNotFoundException {
+  public static void creatPatientsFromFile(List<Patient> patients) throws FileNotFoundException {
     String name;
     int id = patients.size();
     LocalDate birthDate;
@@ -70,8 +70,7 @@ public class PersonService {
 
       // Compare with existing patients to avoid duplication
       if(patientComparator(patients, name, birthDate)){
-        System.out.println("------This patient is already registered in the system------");
-        System.out.println();
+        System.out.printf("%n------This patient is already registered in the system------%n%n");
         continue;
       }
 
@@ -85,7 +84,6 @@ public class PersonService {
       System.out.println();
     }
     inFile.close();
-    return patients;
   }
 
 
@@ -96,7 +94,7 @@ public class PersonService {
    * @return The updated list of doctors after adding doctors from the file.
    * @throws FileNotFoundException If the file is not found or there is an issue with file operations.
    */
-  public static List<Doctor> creatDoctorsFromFile(List<Doctor> doctors) throws FileNotFoundException {
+  public static void creatDoctorsFromFile(List<Doctor> doctors) throws FileNotFoundException {
     String name;
     int id = doctors.size();
     LocalDate birthDate;
@@ -131,8 +129,7 @@ public class PersonService {
       System.out.println("Read yearsInPractice: " + yearsInPractice);
 
       if(doctorComparator(doctors, name, birthDate)){
-        System.out.println("------This doctor is already registered in the system------");
-        System.out.println();
+        System.out.printf("%n------This doctor is already registered in the system------%n%n");
         continue;
       }
 
@@ -145,7 +142,6 @@ public class PersonService {
       System.out.println();
     }
     inFile.close();
-    return doctors;
   }
 
   /**
@@ -155,7 +151,7 @@ public class PersonService {
    * @return The updated list of nurses after adding nurses from the file.
    * @throws FileNotFoundException If the file is not found or there is an issue with file operations.
    */
-  public static List<Nurse> creatNursesFromFile(List<Nurse> nurses) throws FileNotFoundException {
+  public static void creatNursesFromFile(List<Nurse> nurses) throws FileNotFoundException {
     String name;
     int id = nurses.size();
     LocalDate birthDate;
@@ -191,8 +187,7 @@ public class PersonService {
       System.out.println("Read skill: " + skill);
 
       if(nurseComparator(nurses, name, birthDate)){
-        System.out.println("This nurse is already exist.");
-        System.out.println();
+        System.out.println("%n------This nurse is already registered in the system------%n%n");
         continue;
       }
 
@@ -206,7 +201,6 @@ public class PersonService {
       System.out.println();
     }
     inFile.close();
-    return nurses;
   }
   
   /**
@@ -380,7 +374,7 @@ public class PersonService {
    * @return The updated list of patients after adding the new patient.
    * @throws FileNotFoundException If there is an issue with file operations.
    */
-  public static List<Patient> creatPatientManually(List<Patient> patients) throws FileNotFoundException {
+  public static void creatPatientManually(List<Patient> patients) throws FileNotFoundException {
     String name;
     int id = patients.size();
     LocalDate birthDate;
@@ -393,6 +387,7 @@ public class PersonService {
     int choice = 0;
     String NO_INSURANCE_COMPANY = "No insurance company";
     String dateString;
+    String input = "";
 
     System.out.print("Enter patient name: ");
     name = console.nextLine();
@@ -415,9 +410,13 @@ public class PersonService {
 
     // Compare with existing patients to avoid duplication
     if(patientComparator(patients, name, birthDate)){
-      System.out.println("------This patient is already registered in the system------");
-      System.out.println();
-      return patients;
+      System.out.printf("%n------This patient is already registered in the system------%n%n");
+      System.out.println("Do you want to update the information of this patient?(yes to confirm, other to cancel)");
+      input = console.nextLine();
+  
+      if(!input.equalsIgnoreCase("yes")){
+        return;
+      }
     }
     
     System.out.print("Enter patient's address: ");
@@ -461,8 +460,6 @@ public class PersonService {
     updatePatients(patients);
     System.out.println("A new patient added!");
     System.out.println();
-
-    return patients;
   }
 
   /**
@@ -472,7 +469,7 @@ public class PersonService {
    * @return The updated list of doctors after adding the new doctor.
    * @throws FileNotFoundException If there is an issue with file operations.
    */
-  public static List<Doctor> creatDoctorManually(List<Doctor> doctors) throws FileNotFoundException {
+  public static void creatDoctorManually(List<Doctor> doctors) throws FileNotFoundException {
     String name;
     int id = doctors.size();
     LocalDate birthDate;
@@ -481,6 +478,7 @@ public class PersonService {
     String specialty;
     int yearsInPractice;
     String dateString;
+    String input = "";
 
     System.out.print("Enter doctor name: ");
     name = console.nextLine();
@@ -503,9 +501,12 @@ public class PersonService {
 
     // Compare with existing doctors to avoid duplication
     if(doctorComparator(doctors, name, birthDate)){
-      System.out.println("------This doctor is already registered in the system------");
-      System.out.println();
-      return doctors;
+      System.out.printf("%n------This doctor is already registered in the system------%n%n");
+      input = console.nextLine();
+  
+      if(!input.equalsIgnoreCase("yes")){
+        return;
+      }
     }
 
     System.out.print("Enter doctor's address: ");
@@ -525,8 +526,7 @@ public class PersonService {
         break;
       } catch (InputMismatchException e){
         console.nextLine();
-        System.out.println();
-        System.out.printf("------Please enter an integer------%n%");
+        System.out.printf("%n------Please enter an integer------%n%");
       }
     }
 
@@ -537,8 +537,6 @@ public class PersonService {
     updateDoctors(doctors);
     System.out.println("A new doctor added!");
     System.out.println();
-
-    return doctors;
   }
 
   /**
@@ -548,7 +546,7 @@ public class PersonService {
    * @return The updated list of nurses after adding the new nurse.
    * @throws FileNotFoundException If there is an issue with file operations.
    */
-  public static List<Nurse> creatNurseManually(List<Nurse> nurses) throws FileNotFoundException {
+  public static void creatNurseManually(List<Nurse> nurses) throws FileNotFoundException {
     String name;
     int id = nurses.size();
     LocalDate birthDate;
@@ -557,8 +555,7 @@ public class PersonService {
     int yearsInPractice;
     String skill;
     String dateString;
-
-
+    String input = "";
     
     System.out.print("Enter nurse name: ");
     name = console.nextLine();
@@ -581,9 +578,12 @@ public class PersonService {
 
     // Compare with existing nurses to avoid duplication
     if(nurseComparator(nurses, name, birthDate)){
-      System.out.println("------This nurse is already registered in the system------");
-      System.out.println();
-      return nurses;
+      System.out.printf("%n------This nurse is already registered in the system------%n%n");
+      input = console.nextLine();
+  
+      if(!input.equalsIgnoreCase("yes")){
+        return;
+      }  
     }
 
     System.out.print("Enter nurse's address: ");
@@ -600,8 +600,7 @@ public class PersonService {
         break;
       } catch (InputMismatchException e){
         console.nextLine();
-        System.out.println();
-        System.out.printf("------Please enter an integer------%n%");
+        System.out.printf("%n------Please enter an integer------%n%");
       }
     }
 
@@ -616,7 +615,5 @@ public class PersonService {
     updateNurses(nurses);
     System.out.println("A new nurse added!");
     System.out.println();
-
-    return nurses;
   }
 }

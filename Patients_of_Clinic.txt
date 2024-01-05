@@ -1,0 +1,33 @@
+PatientId: 1
+Jack Johnson 
+age: 18
+phone number: 555-123-3214
+address: 123 Main St
+Gender: Male
+MedicalRecords: Heart condition, Diabetes
+CurrentSymptoms: Shortness of breath, Fatigue
+AttendingDoctor: 
+InsuranceCompany: Company A
+
+PatientId: 2
+Jane Smith 
+age: 28
+phone number: 555-567-4728
+address: 456 Oak St
+Gender: Female
+MedicalRecords: Allergies
+CurrentSymptoms: Runny nose, Sneezing
+AttendingDoctor: 
+InsuranceCompany: Company B
+
+PatientId: 3
+Bob Brown 
+age: 43
+phone number: 555-987-2346
+address: 789 Elm St
+Gender: Male
+MedicalRecords: High blood pressure
+CurrentSymptoms: Headache, Dizziness
+AttendingDoctor: 
+InsuranceCompany: Company C
+

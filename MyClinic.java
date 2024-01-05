@@ -44,28 +44,28 @@ public class MyClinic {
     int firstLevelOption = 0;
     int secondLevelOption;
     String temp = "";
-    String WELCOME_MESSAGE = "=======================\n"
-                           + "Welcom to TEAM3 Clinic!\n"
-                           + "=======================\n"
-                           + "Enter request\n"
-                           + "1 - Create patients.\n"
-                           + "2 - Create Doctors.\n"
-                           + "3 - Create Nurses.\n"
-                           + "4 - Create an appointment.\n"
-                           + "5 - Create a treatment.\n"
-                           + "6 - Generate invoice.\n"
-                           + "7 - Export data.\n"
-                           + "8 - Quit.\n"
+    String WELCOME_MESSAGE = "%n=======================%n"
+                           + "Welcom to TEAM3 Clinic!%n"
+                           + "=======================%n"
+                           + "Enter request%n"
+                           + "1 - Create patients.%n"
+                           + "2 - Create Doctors.%n"
+                           + "3 - Create Nurses.%n"
+                           + "4 - Create an appointment.%n"
+                           + "5 - Create a treatment.%n"
+                           + "6 - Generate invoice.%n"
+                           + "7 - Export data.%n"
+                           + "8 - Quit.%n"
                            + "Please enter number 1-8 to choose your option: ";
 
     String INPUT_OPTIONS = "Enter 1 to input data from file, enter 2 to input data manually: ";   
-    String OUTPUT_OPTIONS = "Enter request\n"
-                           + "1 - Print patients list.\n"
-                           + "2 - Print Doctors list.\n"
-                           + "3 - Print Nurses list.\n"
-                           + "4 - Print appointments list.\n"
-                           + "5 - Print treatment list.\n"
-                           + "6 - Print invoice.\n"
+    String OUTPUT_OPTIONS = "Enter request%n"
+                           + "1 - Print patients list.%n"
+                           + "2 - Print Doctors list.%n"
+                           + "3 - Print Nurses list.%n"
+                           + "4 - Print appointments list.%n"
+                           + "5 - Print treatment list.%n"
+                           + "6 - Print invoice.%n"
                            + "Please enter number 1-6 to choose your option or press any key to go back to previous menu: ";                 
 
     List<Patient> patients = new ArrayList<>();
@@ -77,7 +77,7 @@ public class MyClinic {
 
 
     while(firstLevelOption != 8){
-      System.out.print(WELCOME_MESSAGE);
+      System.out.printf(WELCOME_MESSAGE);
       firstLevelOption = console.nextInt();
       System.out.println();
 
@@ -91,10 +91,10 @@ public class MyClinic {
         switch(secondLevelOption)
         {
           case 1:
-            patients = PersonService.creatPatientsFromFile(patients);
+            PersonService.creatPatientsFromFile(patients);
             break;
           case 2:
-            patients = PersonService.creatPatientManually(patients);
+            PersonService.creatPatientManually(patients);
             break;
         }
         break;
@@ -107,10 +107,10 @@ public class MyClinic {
         switch(secondLevelOption)
         {
           case 1:
-            doctors = PersonService.creatDoctorsFromFile(doctors);
+            PersonService.creatDoctorsFromFile(doctors);
             break;
           case 2:
-            doctors = PersonService.creatDoctorManually(doctors);
+            PersonService.creatDoctorManually(doctors);
             break;
         }
         break;
@@ -123,10 +123,10 @@ public class MyClinic {
         switch(secondLevelOption)
         {
           case 1:
-            nurses = PersonService.creatNursesFromFile(nurses);
+            PersonService.creatNursesFromFile(nurses);
             break;
           case 2:
-            nurses = PersonService.creatNurseManually(nurses);
+            PersonService.creatNurseManually(nurses);
             break;
         }
         break;
@@ -139,7 +139,7 @@ public class MyClinic {
           System.out.println("There is no " + temp + " Please input data first.");
           break;
         }
-        appointments = AppointmentService.creatAppointments(appointments, patients, doctors);
+        AppointmentService.creatAppointments(appointments, patients, doctors);
         break;
 
       case 5:
@@ -155,7 +155,7 @@ public class MyClinic {
           System.out.println();
           break;
         } else {
-            treatments = TreatmentService.creatTreatment(treatments, patients, doctors, nurses);
+            TreatmentService.creatTreatment(treatments, patients, doctors, nurses);
         }
         break;
 
@@ -170,7 +170,7 @@ public class MyClinic {
         break;
       case 7:
         // Export data
-        System.out.print(OUTPUT_OPTIONS);
+        System.out.printf(OUTPUT_OPTIONS);
         secondLevelOption = console.nextInt();
         System.out.println();
           switch(secondLevelOption)
