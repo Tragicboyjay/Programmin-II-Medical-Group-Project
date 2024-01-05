@@ -86,7 +86,7 @@ public class MyClinic {
             patients = PersonService.creatPatientsFromFile(patients);
             break;
           case 2:
-            patients = PersonService.creatPatientsManually(patients);
+            patients = PersonService.creatPatientManually(patients);
             break;
         }
         break;
@@ -102,7 +102,7 @@ public class MyClinic {
             doctors = PersonService.creatDoctorsFromFile(doctors);
             break;
           case 2:
-            // to be added: function of input doctors data manually
+            doctors = PersonService.creatDoctorManually(doctors);
             break;
         }
         break;
@@ -118,7 +118,7 @@ public class MyClinic {
             nurses = PersonService.creatNursesFromFile(nurses);
             break;
           case 2:
-            // to be added: function of input nurse data manually
+            nurses = PersonService.creatNurseManually(nurses);
             break;
         }
         break;

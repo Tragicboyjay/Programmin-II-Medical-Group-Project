@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,6 +18,14 @@ import Classes.Patient;
 
 public class PersonService {
   static Scanner console = new Scanner(System.in);
+
+  /**
+   * Creates patients by reading data from a file and adds them to the list of patients.
+   *
+   * @param patients The list of existing patients.
+   * @return The updated list of patients after adding patients from the file.
+   * @throws FileNotFoundException If the file is not found or there is an issue with file operations.
+   */
   public static List<Patient> creatPatientsFromFile(List<Patient> patients) throws FileNotFoundException {
     String name;
     int id = patients.size();
@@ -61,7 +70,7 @@ public class PersonService {
 
       // Compare with existing patients to avoid duplication
       if(patientComparator(patients, name, birthDate)){
-        System.out.println("This patient is already exist.");
+        System.out.println("------This patient is already registered in the system------");
         System.out.println();
         continue;
       }
@@ -79,6 +88,14 @@ public class PersonService {
     return patients;
   }
 
+
+  /**
+   * Creates doctors by reading data from a file and adds them to the list of doctors.
+   *
+   * @param doctors The list of existing doctors.
+   * @return The updated list of doctors after adding doctors from the file.
+   * @throws FileNotFoundException If the file is not found or there is an issue with file operations.
+   */
   public static List<Doctor> creatDoctorsFromFile(List<Doctor> doctors) throws FileNotFoundException {
     String name;
     int id = doctors.size();
@@ -114,7 +131,7 @@ public class PersonService {
       System.out.println("Read yearsInPractice: " + yearsInPractice);
 
       if(doctorComparator(doctors, name, birthDate)){
-        System.out.println("This doctor is already exist.");
+        System.out.println("------This doctor is already registered in the system------");
         System.out.println();
         continue;
       }
@@ -131,6 +148,13 @@ public class PersonService {
     return doctors;
   }
 
+  /**
+   * Creates nurses by reading data from a file and adds them to the list of nurses.
+   *
+   * @param nurses The list of existing nurses.
+   * @return The updated list of nurses after adding nurses from the file.
+   * @throws FileNotFoundException If the file is not found or there is an issue with file operations.
+   */
   public static List<Nurse> creatNursesFromFile(List<Nurse> nurses) throws FileNotFoundException {
     String name;
     int id = nurses.size();
@@ -184,7 +208,15 @@ public class PersonService {
     inFile.close();
     return nurses;
   }
-  // Use to check the duplication
+  
+  /**
+   * Compares a patient's name and birth date with existing patients in the list.
+   *
+   * @param patients The list of existing patients.
+   * @param name     The name of the patient to compare.
+   * @param birthDate The birth date of the patient to compare.
+   * @return True if a patient with the same name and birth date already exists in the list, false otherwise.
+   */
   public static boolean patientComparator(List<Patient> patients, String name, LocalDate birthDate) {
     for (Patient patient : patients) {
       if (patient.getName().toUpperCase().equals(name.toUpperCase()) && patient.getBirthDate().equals(birthDate)){
@@ -194,6 +226,14 @@ public class PersonService {
     return false;
   }
 
+  /**
+   * Compares a doctor's name and birth date with existing doctors in the list.
+   *
+   * @param doctors The list of existing doctors.
+   * @param name     The name of the doctor to compare.
+   * @param birthDate The birth date of the doctor to compare.
+   * @return True if a doctor with the same name and birth date already exists in the list, false otherwise.
+   */
   public static boolean doctorComparator(List<Doctor> doctors, String name, LocalDate birthDate) {
     for (Doctor doctor : doctors) {
       if (doctor.getName().toUpperCase().equals(name.toUpperCase()) && doctor.getBirthDate().equals(birthDate)){
@@ -203,6 +243,14 @@ public class PersonService {
     return false;
   }
 
+  /**
+   * Compares a nurse's name and birth date with existing nurses in the list.
+   *
+   * @param doctors The list of existing nurses.
+   * @param name     The name of the nurse to compare.
+   * @param birthDate The birth date of the nurse to compare.
+   * @return True if a nurse with the same name and birth date already exists in the list, false otherwise.
+   */
   public static boolean nurseComparator(List<Nurse> nurses, String name, LocalDate birthDate) {
     for (Nurse nurse : nurses) {
       if (nurse.getName().toUpperCase().equals(name.toUpperCase()) && nurse.getBirthDate().equals(birthDate)){
@@ -212,7 +260,12 @@ public class PersonService {
     return false;
   }
 
-  // Print the data out and export to txt file
+  /**
+   * Prints out information about patients to a file and the console.
+   *
+   * @param patients The list of patients to be printed.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
   public static void printOutPatients(List<Patient> patients) throws FileNotFoundException {
     PrintWriter outFile;
     outFile = new PrintWriter("Patients_of_Clinic.txt");
@@ -224,6 +277,12 @@ public class PersonService {
     outFile.close();
   }
 
+  /**
+   * Updates the patient information in a file with the latest data.
+   *
+   * @param patients The list of patients whose information will be updated in the file.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
   public static void updatePatients(List<Patient> patients) throws FileNotFoundException {
     PrintWriter outFile;
     outFile = new PrintWriter("patients.txt");
@@ -240,6 +299,12 @@ public class PersonService {
     outFile.close();
   }
 
+  /**
+   * Prints out information about doctors to a file and the console.
+   *
+   * @param doctors The list of doctors to be printed.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
   public static void printOutDoctors(List<Doctor> doctors) throws FileNotFoundException {
     PrintWriter outFile;
     outFile = new PrintWriter("Doctors_of_Clinic.txt");
@@ -251,6 +316,12 @@ public class PersonService {
     outFile.close();
   }
 
+  /**
+   * Updates the doctor information in a file with the latest data.
+   *
+   * @param doctors The list of doctors whose information will be updated in the file.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
   public static void updateDoctors(List<Doctor> doctors) throws FileNotFoundException {
     PrintWriter outFile;
     outFile = new PrintWriter("doctors.txt");
@@ -265,6 +336,12 @@ public class PersonService {
     outFile.close();
   }
 
+  /**
+   * Prints out information about nurses to a file and the console.
+   *
+   * @param nurses The list of nurses to be printed.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
   public static void printOutNurses(List<Nurse> nurses) throws FileNotFoundException {
     PrintWriter outFile;
     outFile = new PrintWriter("Nurses_of_Clinic.txt");
@@ -276,6 +353,12 @@ public class PersonService {
     outFile.close();
   }
 
+  /**
+   * Updates the nurse information in a file with the latest data.
+   *
+   * @param nurses The list of nurses whose information will be updated in the file.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
   public static void updateNurses(List<Nurse> nurses) throws FileNotFoundException {
     PrintWriter outFile;
     outFile = new PrintWriter("nurses.txt");
@@ -290,8 +373,14 @@ public class PersonService {
     outFile.close();
   }
 
-  // Create patient manually
-  public static List<Patient> creatPatientsManually(List<Patient> patients) throws FileNotFoundException {
+  /**
+   * Manually creates a new patient and add it to the list of patients.
+   *
+   * @param patients The list of existing patients.
+   * @return The updated list of patients after adding the new patient.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
+  public static List<Patient> creatPatientManually(List<Patient> patients) throws FileNotFoundException {
     String name;
     int id = patients.size();
     LocalDate birthDate;
@@ -326,7 +415,7 @@ public class PersonService {
 
     // Compare with existing patients to avoid duplication
     if(patientComparator(patients, name, birthDate)){
-      System.out.println("------This patient is already exist------");
+      System.out.println("------This patient is already registered in the system------");
       System.out.println();
       return patients;
     }
@@ -374,5 +463,153 @@ public class PersonService {
     System.out.println();
 
     return patients;
+  }
+
+  /**
+   * Manually creates a new doctor and add it to the list of patients.
+   *
+   * @param doctors The list of existing doctors.
+   * @return The updated list of doctors after adding the new doctor.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
+  public static List<Doctor> creatDoctorManually(List<Doctor> doctors) throws FileNotFoundException {
+    String name;
+    int id = doctors.size();
+    LocalDate birthDate;
+    String address;
+    String phone;
+    String specialty;
+    int yearsInPractice;
+    String dateString;
+
+    System.out.print("Enter doctor name: ");
+    name = console.nextLine();
+
+    while (true) {
+      
+      try {
+        System.out.print("Enter doctor's birthDate (yyyy-MM-dd): ");
+        dateString = console.nextLine();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        birthDate = LocalDate.parse(dateString, formatter);
+        break;
+
+      } catch (Exception e) {
+          System.out.println("Invalid date format. ");
+      }
+    }
+
+    // Compare with existing doctors to avoid duplication
+    if(doctorComparator(doctors, name, birthDate)){
+      System.out.println("------This doctor is already registered in the system------");
+      System.out.println();
+      return doctors;
+    }
+
+    System.out.print("Enter doctor's address: ");
+    address = console.nextLine();
+
+    System.out.print("Enter doctor's phone number: ");
+    phone = console.nextLine();
+
+    System.out.print("Enter doctor's specialty: " );
+    specialty = console.nextLine();
+
+    while (true) {
+      
+      try {
+        System.out.print("Enter yearsInPractice: ");
+        yearsInPractice = console.nextInt();
+        break;
+      } catch (InputMismatchException e){
+        console.nextLine();
+        System.out.println();
+        System.out.printf("------Please enter an integer------%n%");
+      }
+    }
+
+    id++;
+
+    Doctor doctor = new Doctor(name, birthDate, address, phone, id, specialty, yearsInPractice);
+    doctors.add(doctor);
+    updateDoctors(doctors);
+    System.out.println("A new doctor added!");
+    System.out.println();
+
+    return doctors;
+  }
+
+  public static List<Nurse> creatNurseManually(List<Nurse> nurses) throws FileNotFoundException {
+    String name;
+    int id = nurses.size();
+    LocalDate birthDate;
+    String address;
+    String phone;
+    int yearsInPractice;
+    String skill;
+    String dateString;
+
+
+    
+    System.out.print("Enter nurse name: ");
+    name = console.nextLine();
+
+    while (true) {
+      
+      try {
+        System.out.print("Enter nurse's birthDate (yyyy-MM-dd): ");
+        dateString = console.nextLine();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        birthDate = LocalDate.parse(dateString, formatter);
+        break;
+
+      } catch (Exception e) {
+          System.out.println("Invalid date format. ");
+      }
+    }
+
+    // Compare with existing nurses to avoid duplication
+    if(nurseComparator(nurses, name, birthDate)){
+      System.out.println("------This nurse is already registered in the system------");
+      System.out.println();
+      return nurses;
+    }
+
+    System.out.print("Enter nurse's address: ");
+    address = console.nextLine();
+
+    System.out.print("Enter nurse's phone number: ");
+    phone = console.nextLine();
+
+    while (true) {
+      
+      try {
+        System.out.print("Enter yearsInPractice: ");
+        yearsInPractice = console.nextInt();
+        break;
+      } catch (InputMismatchException e){
+        console.nextLine();
+        System.out.println();
+        System.out.printf("------Please enter an integer------%n%");
+      }
+    }
+
+    System.out.print("Enter nurse's skill: " );
+    skill = console.nextLine();
+
+    id++;
+
+    Nurse nurse = new Nurse(name, birthDate, address, phone, id, yearsInPractice, skill);
+
+    nurses.add(nurse);
+    updateNurses(nurses);
+    System.out.println("A new nurse added!");
+    System.out.println();
+
+    return nurses;
   }
 }
