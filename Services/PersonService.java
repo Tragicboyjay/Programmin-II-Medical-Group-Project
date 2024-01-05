@@ -466,7 +466,7 @@ public class PersonService {
   }
 
   /**
-   * Manually creates a new doctor and add it to the list of patients.
+   * Manually creates a new doctor and add it to the list of doctors.
    *
    * @param doctors The list of existing doctors.
    * @return The updated list of doctors after adding the new doctor.
@@ -541,6 +541,13 @@ public class PersonService {
     return doctors;
   }
 
+  /**
+   * Manually creates a new nurse and add it to the list of nurses.
+   *
+   * @param doctors The list of existing nurses.
+   * @return The updated list of nurses after adding the new nurse.
+   * @throws FileNotFoundException If there is an issue with file operations.
+   */
   public static List<Nurse> creatNurseManually(List<Nurse> nurses) throws FileNotFoundException {
     String name;
     int id = nurses.size();
