@@ -44,29 +44,29 @@ public class MyClinic {
     int firstLevelOption = 0;
     int secondLevelOption;
     String temp = "";
-    String WELCOME_MESSAGE = "%n=======================%n"
-                           + "Welcom to TEAM3 Clinic!%n"
-                           + "=======================%n"
-                           + "Enter request%n"
-                           + "1 - Create patients.%n"
-                           + "2 - Create Doctors.%n"
-                           + "3 - Create Nurses.%n"
-                           + "4 - Create an appointment.%n"
-                           + "5 - Create a treatment.%n"
-                           + "6 - Generate invoice.%n"
-                           + "7 - Export data.%n"
-                           + "8 - Quit.%n"
-                           + "Please enter number 1-8 to choose your option: ";
+    String MAIN_MENU_OPTION = "%n=======================%n"
+                            + "Welcom to TEAM3 Clinic!%n"
+                            + "=======================%n"
+                            + "Enter request%n"
+                            + "1 - Create patients.%n"
+                            + "2 - Create Doctors.%n"
+                            + "3 - Create Nurses.%n"
+                            + "4 - Create an appointment.%n"
+                            + "5 - Create a treatment.%n"
+                            + "6 - Generate invoice.%n"
+                            + "7 - Export data.%n"
+                            + "8 - Quit.%n"
+                            + "Please enter number 1-8 to choose your option: ";
 
-    String INPUT_OPTIONS = "Enter 1 to input data from file, enter 2 to input data manually: ";   
-    String OUTPUT_OPTIONS = "Enter request%n"
-                           + "1 - Print patients list.%n"
-                           + "2 - Print Doctors list.%n"
-                           + "3 - Print Nurses list.%n"
-                           + "4 - Print appointments list.%n"
-                           + "5 - Print treatment list.%n"
-                           + "6 - Print invoice.%n"
-                           + "Please enter number 1-6 to choose your option or press any key to go back to previous menu: ";                 
+    String INPUT_MENU_OPTIONS = "Enter 1 to input data from file, enter 2 to input data manually: ";   
+    String OUTPUT_MENU_OPTIONS = "Enter request%n"
+                                + "1 - Print patients list.%n"
+                                + "2 - Print Doctors list.%n"
+                                + "3 - Print Nurses list.%n"
+                                + "4 - Print appointments list.%n"
+                                + "5 - Print treatment list.%n"
+                                + "6 - Print invoice.%n"
+                                + "Please enter number 1-6 to choose your option or press any key to go back to previous menu: ";                 
 
     List<Patient> patients = new ArrayList<>();
     List<Doctor> doctors = new ArrayList<>();
@@ -77,7 +77,7 @@ public class MyClinic {
 
 
     while(firstLevelOption != 8){
-      System.out.printf(WELCOME_MESSAGE);
+      System.out.printf(MAIN_MENU_OPTION);
       firstLevelOption = console.nextInt();
       System.out.println();
 
@@ -85,7 +85,7 @@ public class MyClinic {
       {
       case 1:
         // Select patient information: either input from a file or enter manually.
-        System.out.print(INPUT_OPTIONS);
+        System.out.print(INPUT_MENU_OPTIONS);
         secondLevelOption = console.nextInt();
         System.out.println();
         switch(secondLevelOption)
@@ -101,7 +101,7 @@ public class MyClinic {
         
       case 2:
         // Select doctor information: either input from a file or enter manually.
-        System.out.print(INPUT_OPTIONS);
+        System.out.print(INPUT_MENU_OPTIONS);
         secondLevelOption = console.nextInt();
         System.out.println();
         switch(secondLevelOption)
@@ -117,7 +117,7 @@ public class MyClinic {
 
       case 3:
         // Select nurse information: either input from a file or enter manually.
-        System.out.print(INPUT_OPTIONS);
+        System.out.print(INPUT_MENU_OPTIONS);
         secondLevelOption = console.nextInt();
         System.out.println();
         switch(secondLevelOption)
@@ -170,7 +170,7 @@ public class MyClinic {
         break;
       case 7:
         // Export data
-        System.out.printf(OUTPUT_OPTIONS);
+        System.out.printf(OUTPUT_MENU_OPTIONS);
         secondLevelOption = console.nextInt();
         System.out.println();
           switch(secondLevelOption)
