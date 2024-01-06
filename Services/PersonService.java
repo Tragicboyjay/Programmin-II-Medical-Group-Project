@@ -69,7 +69,7 @@ public class PersonService {
       System.out.println("Read insuranceCompany: " + insuranceCompany);
 
       // Compare with existing patients to avoid duplication
-      if(patientComparator(patients, name, birthDate)){
+      if(patientComparator(patients, name, birthDate) != null){
         System.out.printf("%n------This patient is already registered in the system------%n%n");
         continue;
       }
@@ -128,7 +128,7 @@ public class PersonService {
       yearsInPractice = Integer.parseInt(inFile.nextLine());
       System.out.println("Read yearsInPractice: " + yearsInPractice);
 
-      if(doctorComparator(doctors, name, birthDate)){
+      if(doctorComparator(doctors, name, birthDate) != null){
         System.out.printf("%n------This doctor is already registered in the system------%n%n");
         continue;
       }
@@ -186,7 +186,7 @@ public class PersonService {
       skill = inFile.nextLine();
       System.out.println("Read skill: " + skill);
 
-      if(nurseComparator(nurses, name, birthDate)){
+      if(nurseComparator(nurses, name, birthDate) != null){
         System.out.printf("%n------This nurse is already registered in the system------%n%n");
         continue;
       }
@@ -211,13 +211,13 @@ public class PersonService {
    * @param birthDate The birth date of the patient to compare.
    * @return True if a patient with the same name and birth date already exists in the list, false otherwise.
    */
-  public static boolean patientComparator(List<Patient> patients, String name, LocalDate birthDate) {
+  public static Patient patientComparator(List<Patient> patients, String name, LocalDate birthDate) {
     for (Patient patient : patients) {
       if (patient.getName().toUpperCase().equals(name.toUpperCase()) && patient.getBirthDate().equals(birthDate)){
-        return true;
+        return patient;
       }
     }
-    return false;
+    return null;
   }
 
   /**
@@ -228,13 +228,13 @@ public class PersonService {
    * @param birthDate The birth date of the doctor to compare.
    * @return True if a doctor with the same name and birth date already exists in the list, false otherwise.
    */
-  public static boolean doctorComparator(List<Doctor> doctors, String name, LocalDate birthDate) {
+  public static Doctor doctorComparator(List<Doctor> doctors, String name, LocalDate birthDate) {
     for (Doctor doctor : doctors) {
       if (doctor.getName().toUpperCase().equals(name.toUpperCase()) && doctor.getBirthDate().equals(birthDate)){
-        return true;
+        return doctor;
       }
     }
-    return false;
+    return null;
   }
 
   /**
@@ -245,13 +245,13 @@ public class PersonService {
    * @param birthDate The birth date of the nurse to compare.
    * @return True if a nurse with the same name and birth date already exists in the list, false otherwise.
    */
-  public static boolean nurseComparator(List<Nurse> nurses, String name, LocalDate birthDate) {
+  public static Nurse nurseComparator(List<Nurse> nurses, String name, LocalDate birthDate) {
     for (Nurse nurse : nurses) {
       if (nurse.getName().toUpperCase().equals(name.toUpperCase()) && nurse.getBirthDate().equals(birthDate)){
-        return true;
+        return nurse;
       }
     }
-    return false;
+    return null;
   }
 
   /**
@@ -388,6 +388,8 @@ public class PersonService {
     String NO_INSURANCE_COMPANY = "No insurance company";
     String dateString;
     String input = "";
+    boolean update = false;
+    Patient patient;
 
     System.out.print("Enter patient name: ");
     name = console.nextLine();
@@ -409,12 +411,13 @@ public class PersonService {
     }
 
     // Compare with existing patients to avoid duplication
-    if(patientComparator(patients, name, birthDate)){
+    if(patientComparator(patients, name, birthDate) != null){
       System.out.printf("%n------This patient is already registered in the system------%n%n");
       System.out.println("Do you want to update the information of this patient?(yes to confirm, other to cancel)");
       input = console.nextLine();
-  
-      if(!input.equalsIgnoreCase("yes")){
+      update = input.equalsIgnoreCase("yes");
+
+      if(!update) {
         return;
       }
     }
@@ -454,11 +457,22 @@ public class PersonService {
 
     id++;
 
-    Patient patient = new Patient(name, birthDate, address, phone, id, gender, medicalRecords, currentSymptoms, insuranceCompany);
+    if (update) {
+      patient = patientComparator(patients, name, birthDate);
+      patient.setAddress(address);
+      patient.setPhone(phone);
+      patient.setGender(gender);
+      patient.setMedicalRecords(medicalRecords);
+      patient.setCurrentSymptoms(currentSymptoms);
+      patient.setInsuranceCompany(insuranceCompany);
+      System.out.println("Information of " + name + " is updated!");
+    } else {
+      patient = new Patient(name, birthDate, address, phone, id, gender, medicalRecords, currentSymptoms, insuranceCompany);
+      patients.add(patient);
+      System.out.println("A new patient added!");
+    }
 
-    patients.add(patient);
     updatePatients(patients);
-    System.out.println("A new patient added!");
     System.out.println();
   }
 
@@ -479,6 +493,8 @@ public class PersonService {
     int yearsInPractice;
     String dateString;
     String input = "";
+    boolean update = false;
+    Doctor doctor;
 
     System.out.print("Enter doctor name: ");
     name = console.nextLine();
@@ -500,11 +516,13 @@ public class PersonService {
     }
 
     // Compare with existing doctors to avoid duplication
-    if(doctorComparator(doctors, name, birthDate)){
+    if(doctorComparator(doctors, name, birthDate) != null){
       System.out.printf("%n------This doctor is already registered in the system------%n%n");
+      System.out.println("Do you want to update the information of this doctor?(yes to confirm, other to cancel)");
       input = console.nextLine();
-  
-      if(!input.equalsIgnoreCase("yes")){
+      update = input.equalsIgnoreCase("yes");
+
+      if(!update) {
         return;
       }
     }
@@ -532,10 +550,20 @@ public class PersonService {
 
     id++;
 
-    Doctor doctor = new Doctor(name, birthDate, address, phone, id, specialty, yearsInPractice);
-    doctors.add(doctor);
+    if (update) {
+      doctor = doctorComparator(doctors, name, birthDate);
+      doctor.setAddress(address);
+      doctor.setPhone(phone);
+      doctor.setSpecialty(specialty);
+      doctor.setYearsInPractice(yearsInPractice);
+      System.out.println("Information of " + name + " is updated!");
+    } else {
+      doctor = new Doctor(name, birthDate, address, phone, id, specialty, yearsInPractice);
+      doctors.add(doctor);
+      System.out.println("A new doctor added!");
+    }
+
     updateDoctors(doctors);
-    System.out.println("A new doctor added!");
     System.out.println();
   }
 
@@ -556,6 +584,8 @@ public class PersonService {
     String skill;
     String dateString;
     String input = "";
+    boolean update = false;
+    Nurse nurse;
     
     System.out.print("Enter nurse name: ");
     name = console.nextLine();
@@ -577,8 +607,9 @@ public class PersonService {
     }
 
     // Compare with existing nurses to avoid duplication
-    if(nurseComparator(nurses, name, birthDate)){
+    if(nurseComparator(nurses, name, birthDate) != null){
       System.out.printf("%n------This nurse is already registered in the system------%n%n");
+      System.out.println("Do you want to update the information of this nurse?(yes to confirm, other to cancel)");
       input = console.nextLine();
   
       if(!input.equalsIgnoreCase("yes")){
@@ -609,11 +640,20 @@ public class PersonService {
 
     id++;
 
-    Nurse nurse = new Nurse(name, birthDate, address, phone, id, yearsInPractice, skill);
+    if (update) {
+      nurse = nurseComparator(nurses, name, birthDate);
+      nurse.setAddress(address);
+      nurse.setPhone(phone);
+      nurse.setYearsInPractice(yearsInPractice);
+      nurse.setSkill(skill);
+      System.out.println("Information of " + name + " is updated!");
+    } else {
+      nurse = new Nurse(name, birthDate, address, phone, id, yearsInPractice, skill);
+      nurses.add(nurse);
+      System.out.println("A new nurse added!");
+    }
 
-    nurses.add(nurse);
     updateNurses(nurses);
-    System.out.println("A new nurse added!");
     System.out.println();
   }
 }
