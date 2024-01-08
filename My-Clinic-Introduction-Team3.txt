@@ -42,16 +42,16 @@ Basic functional assumptions of the clinic management system:
 
 	Pre-service
 
-		5, Create a new patient file.
+		5, Create a new patient file.      --- UML Diagram ( ??? ）
 
-		6, Update existing patient files.
+		6, Update existing patient files.  --- UML Diagram ( ??? ）
 
-		7, make an appointment
+		7, make an appointment             ---UML Diagram ( UML-Appointment）
 
 
 	Treatment services
 
-		8, Make a treatment plan
+		8, Make a treatment plan          --- UML Diagram ( UML-Treatment）
 
 
 	Other services
@@ -536,16 +536,16 @@ Invoice
 the classes for services
 
 
-AppointmentService --- UML Diagram ( UML-Appointment）
+AppointmentService 
 
 
-TreatmentService   --- UML Diagram ( UML-Treatment）
+TreatmentService   
 
 
-InvoiveService     --- UML Diagram ( UML-？？？）
+InvoiveService     
 
 
-PersonService      --- UML Diagram ( UML-？？？）
+PersonService      
 
 
 
