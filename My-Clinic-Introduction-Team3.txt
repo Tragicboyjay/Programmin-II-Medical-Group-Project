@@ -1,0 +1,569 @@
+PROJECT INITIATION
+
+
+Clinic basic information settings:
+
+	1, Name of the company:
+		My Clinic
+		
+	2, Creation time and branches
+		Clinic created in October 2023, no branch date
+		
+	3, Employee information
+		Total number of employees: 6.
+		Including 1 director, 2 nurses and 3 doctors
+		
+	4, Department settings and 
+		Two departments: Psychology and Physical Therapy
+		
+	5, Medical services
+		Two therapy services: Psychotherapy and Physical Assistance
+		
+	6, Business hours:
+		Monday to Friday, 9 am to 4 pm
+
+
+---------
+
+
+Basic functional assumptions of the clinic management system:
+
+
+	Human resources management
+
+		1, Add doctor information.
+
+		2, Add nurse information.
+
+		3, Delete doctor information.
+
+		4, Delete nurse information.
+
+
+	Pre-service
+
+		5, Create a new patient file.
+
+		6, Update existing patient files.
+
+		7, make an appointment
+
+
+	Treatment services
+
+		8, Make a treatment plan
+
+
+	Other services
+
+
+		9, Treatment cost calculation.
+
+		10,Invoice printing
+
+		11,Patient information management
+
+		12,Employee information management
+
+
+----------
+
+
+Specify the Abstract class and the inherited classes: (see the UML diagram)
+
+
+the Abstract class (Super-Class):
+
+	Person:
+
+	-attributes:
+
+		private String name;
+		private LocalDate birthDate;
+		private int age;
+		private String address;
+		private String phone;
+
+	-constructor
+
+		public Person() {}
+
+		public Person(String name, LocalDate birthDate, String address, String phone) {}
+
+	-setter and getter
+
+		public int getAge() {}
+
+		public String getAddress() {}
+
+		public void setAddress(String address) {}
+
+		public String getPhone() {}
+
+		public void setPhone(String phone) {}
+
+	-other methods
+
+		public String toString() {
+			return String.format("%s %nage: %s%nphone number: %s%naddress: %s%n"
+			, getName(), getAge(), getPhone(), getAddress());
+		}
+
+
+..........
+
+
+the inherited classes(Sub-Class):
+
+
+Patient:
+
+-attributes:
+
+	private int patientId;
+	private String gender;
+	private String medicalRecords;
+	private String currentSymptoms;
+	private String attendingDoctor;
+	private String insuranceCompany;
+	private List<Treatment> treatments; 
+
+
+
+	public Patient() {}
+
+	public Patient (String name, LocalDate birthDate, String address, String phone, int patientId, 
+			String gender, String medicalRecords, String currentSymptoms, String insuranceCompany) {}
+
+-setter and getter
+
+	public int getPatientId() {}
+
+	public void setPatientId(int patientId) {}
+
+	public String getGender() {}
+
+	public void setGender(String gender) {}
+
+	public String getMedicalRecords() {}
+
+	public void setMedicalRecords(String medicalRecords) {}
+
+	public String getCurrentSymptoms() {}
+
+	public void setCurrentSymptoms(String currentSymptoms) {}
+
+	public String getAttendingDoctor() { }
+
+	public void setAttendingDoctor(String attendingDoctor) {}
+
+	public String getInsuranceCompany() {}
+
+	public void setInsuranceCompany(String insuranceCompany) {}
+
+
+	public List<Treatment> getTreatments() {}
+
+	public void setTreatments(List<Treatment> treatments) {}
+
+
+-other methods
+
+	Override
+	public String toString() {
+		List<Treatment> treatments = getTreatments();
+  
+		// Extract treatment numbers
+		List<String> treatmentIds = treatments.stream()
+				.map(Treatment::getTreatmentId)
+				.map(Object::toString)
+				.collect(Collectors.toList());
+  
+		return String.format("%s: %d%n%s%s: %s%n%s: %s%n%s: %s%n%s: %s%n%s: %s%n",
+				"PatientId", getPatientId(),
+				super.toString(),
+				"Gender", getGender(),
+				"MedicalRecords", getMedicalRecords(),
+				"CurrentSymptoms", getCurrentSymptoms(),
+				"AttendingDoctor", getAttendingDoctor(),
+				"InsuranceCompany", getInsuranceCompany(),
+				"treatments", String.join(", ", treatmentIds));
+	}
+   
+   
+..........
+
+
+Nurse
+
+-attributes:
+
+	private int nurseId;
+	private int yearsInPractice;
+	private String skill;
+
+
+-constructor
+
+	public Nurse() {}
+
+	public Nurse(String name, LocalDate birthDate, String address, String phone, int nurseId, 
+	int yearsInPractice, String skill) { }
+
+
+-setter and getter
+
+	public int getNurseId() {}
+
+	public void setNurseId(int nurseId) {}
+
+	public int getYearsInPractice() {}
+
+	public void setYearsInPractice(int yearsInPractice) {}
+
+	public String getSkill() {}
+
+	public void setSkill(String skill) {}
+
+
+-other methods
+
+	@Override
+	public String toString() {
+		return String.format("%s: %d %n%s%s: %d %n%s: %s %n", 
+				"NurseId", getNurseId(), super.toString(),"YearsInPractice", 
+				getYearsInPractice(),"Skill", getSkill());
+	}
+
+
+..........
+
+Doctor
+
+-attributes:
+
+	private int doctorId;
+	
+	private String specialty;
+	
+	private int yearsInPractice;
+	
+	private List<Patient> assignedPatients;
+
+
+-constructor
+
+	public Doctor() {}
+
+	public Doctor(String name, LocalDate birthDate, String address, String phone, 
+		int doctorId, String specialty, int yearsInPractice) {}
+
+
+-setter and getter
+
+  public String getSpecialty() {}
+
+  public void setSpecialty(String specialty) {}
+
+  public int getDoctorId() {}
+
+  public void setDoctorId(int doctorId) {}
+
+  public int getYearsInPractice() {}
+
+  public void setYearsInPractice(int yearsInPractice) {}
+
+  public List<Patient> getAssignedPatients() {}
+
+  public void setAssignedPatients(List<Patient> assignedPatients) {}
+
+
+-other methods
+
+	@Override
+	public String toString() {
+		List<Patient> assignedPatients = getAssignedPatients();
+		
+		// Extract patient names
+		List<String> patientNames = assignedPatients.stream()
+				.map(Patient::getName)
+				.collect(Collectors.toList());
+				
+		return String.format("%s: %d %n%s%s: %s %n%s: %d %n%s: %s %n", 
+				"DoctorId", getDoctorId(),
+				super.toString(),
+				"Specialty", getSpecialty(),
+				"YearsInPractice", getYearsInPractice(),
+				"AssignedPatients", String.join(", ", patientNames));
+	}
+
+...................................................................
+
+
+the other classes for action
+
+
+Appointment
+
+-attributes:
+
+	private int appointmentId;
+	private String patientName;
+	private String doctorName;
+	private String phone;
+	private LocalDateTime date;
+	private LocalDateTime creationTimestamp;
+
+-constructor
+
+	public Appointment() {}
+
+	public Appointment(int appointmentId, String patientName, String doctorName, 
+		String phone, LocalDateTime date) {}
+
+-setter and getter
+
+	public int getAppointmentId() {}
+
+	public void setAppointmentId(int appointmentId) {}
+  
+	public String getPatientName() {}
+
+	public void setPatientName(String patientName) {}
+
+	public String getDoctorName() {}
+  
+	public void setDoctorName(String doctorName) {}
+
+	public String getPhone() {}
+
+	public void setPhone(String phone) {}
+
+	public LocalDateTime getDate() {}
+
+	public void setDate(LocalDateTime date) {}
+
+	public LocalDateTime getCreationTimestamp() {}
+
+	public void setCreationTimestamp() {}
+
+-other methods
+
+	@Override 
+	public String toString() {
+		return String.format("AppointmentId: %d %nPatient Name: %s%nDoctor Name: %s%nphone number: %s%nAppointment Date: %s%nAppointment created on :%s%n"
+		, getAppointmentId(), getPatientName(), getDoctorName(), getPhone(), getDate(), getCreationTimestamp());
+	}
+
+
+..........
+
+Treatment
+
+-attributes:
+
+	private int treatmentId;
+	
+	private String patient;
+	
+	private String doctor;
+	
+	private String nurse;
+	
+	private String treatmentDescription;
+	
+	private LocalDate startDate;
+	
+	private LocalDate endDate;
+	
+	private int medicationUnit;
+	
+	private boolean diagnosticTest;
+	
+	private LocalDateTime creationTimestamp;
+
+-constructor
+
+	public Treatment(int treatmentId, String patient, String doctor, String nurse, 
+		String treatmentDescription,LocalDate startDate, LocalDate endDate, boolean diagnosticTest) {}
+
+-setter and getter
+
+	public int getTreatmentId() {}
+
+	public void setTreatmentId(int treatmentId) {}
+
+	public String getPatient() {}
+
+	public void setPatient(String patient) {}
+
+	public String getDoctor() {}
+
+	public void setDoctor(String doctor) {}
+
+	public String getNurse() {}
+
+	public void setNurse(String nurse) {}
+
+	public String getTreatmentDescription() {}
+
+	public void setTreatmentDescription(String treatmentDescription) {}
+
+	public LocalDate getStartDate() {}
+
+	public void setStartDate(LocalDate startDate) {}
+
+	public LocalDate getEndDate() {}
+
+	public void setEndDate(LocalDate endDate) {}
+
+	public int getMedicationUnit() {}
+
+	public void setMedicationUnit() {}
+
+	public boolean isDiagnosticTest() {}
+
+	public void setDiagnosticTest(boolean diagnosticTest) {}
+
+	public LocalDateTime getCreationTimestamp() {}
+
+	public void setCreationTimestamp() {}
+
+
+-other methods
+
+	public String toString() {
+		return String.format("TreatmentId: %d %nPatient Name: %s%nDoctor Name: %s%nNurse Name: %s%nTreatment description: %s%nStart Date: %s%nEnd Date: %s%nMedical unit: %d%nDiagnostic test: %s%nTreatment created on :%s%n"
+		, getTreatmentId(), getPatient(), getDoctor(), getNurse(), getTreatmentDescription(), getStartDate(), getEndDate(), getMedicationUnit(), isDiagnosticTest(), getCreationTimestamp());
+	}
+
+
+...........
+
+
+Invoice
+
+-attributes:
+
+	private int invoiceId;
+	
+	private String payorName;
+	
+	private double registrationFee;
+	
+	private int medicationUnit;
+	
+	private double medicationPricePerUnit;
+	
+	private boolean diagnosticTest;
+	
+	private double diagnosticTestFee;
+	
+	private double insurancCoverage;
+	
+	private double totalAmount;
+	
+	private LocalDateTime creationTimestamp;
+
+-constructor
+
+	public Invoice() {}
+  
+	public Invoice(int invoiceId, String payorName, double registrationFee, int medicationUnit, double medicationPricePerUnit, boolean diagnosticTest,
+		double diagnosticTestFee, double insurancCoverage) {}
+
+
+-setter and getter
+
+	public int getInvoiceId() {}
+
+	public void setInvoiceId(int invoiceId) {}
+
+	public String getPayorName() {}
+
+	public void setPayorName(String payorName) {}
+
+	public double getRegistrationFee() {}
+  
+	public void setRegistrationFee(double registrationFee) {}
+
+	public int getMedicationUnit() {}
+
+	public void setMedicationUnit(int medicationUnit) {}
+
+	public double getMedicationPricePerUnit() {}
+
+	public void setMedicationPricePerUnit(double medicationPricePerUnit) {}
+
+	public double getDiagnosticTestFee() {}
+
+	public void setDiagnosticTestFee(double diagnosticTestFee) {}
+
+	public boolean isDiagnosticTest() {}
+
+	public void setDiagnosticTest(boolean diagnosticTest) {}
+
+	public double getInsurancCoverage() {}
+
+	public void setInsurancCoverage(double insurancCoverage) {}
+
+	public double getTotalAmount() {}
+
+	public void setTotalAmount() {}
+
+	public LocalDateTime getCreationTimestamp() {}
+
+	public void setCreationTimestamp() {}
+
+-other methods
+
+	@Override
+	public String toString() {
+		return String.format("%s%d%n %s%s%n %s%,.2f%n %s%d%n %s%,.2f%n %s%,.2f%n %s%,.2f%%%n %s%,.2f%n %s%s%n",
+				"InvoiceId: ", getInvoiceId(),
+				"Payor: ", getPayorName(),
+				"Registration fee: $", getRegistrationFee(),
+				"Medication unit: ", getMedicationUnit(),
+				"Medication fee: $", getMedicationUnit() * getMedicationPricePerUnit(),
+				"Diagnostic test fee: $", getDiagnosticTestFee(),
+				"Insuranc Coverage: ", getInsurancCoverage(),
+				"Total amount: $", getTotalAmount(),
+				"Invoice created on ", getCreationTimestamp());
+	}
+
+===========
+
+Instance vs. Static
+
+A variable or method that is dependent on a specific instance of the class must be an instance variable 
+or method. A variable that is shared by all the instances of a class should be declared static. 
+For example, the variable numberOfObjects in Circle is shared by all the objects of the Circle class, 
+and therefore is declared static. A method that is not dependent on a specific instance should be 
+defined as a static method. For instance, the getNumberOfObjects() method in Circle is not tied to 
+any specific instance and therefore is defined as a static method.
+Always reference static variables and methods from a class name (rather than a reference variable) to 
+improve readability and avoid errors.
+
+
+Inheritance vs. Aggregation
+
+The difference between inheritance and aggregation is the difference between an is-a and a has-a 
+relationship. For example, an apple is a fruit; thus, you would use inheritance to model the relationship
+ between the classes Apple and Fruit. A person has a name; thus, you would use aggregation to model 
+ the relationship between the classes Person and Name.
+ 
+ 
+Interfaces vs. Abstract Classes
+
+Both interfaces and abstract classes can be used to specify common behavior for objects. How do you decide 
+whether to use an interface or a class? In general, a strong is-a relationship that clearly describes 
+a parent–child relationship should be modeled using classes. For example, since an orange is a fruit, 
+their relationship should be modeled using class inheritance.
+A weak is-a relationship, also known as an is-kind-of relationship, indicates that an object possesses 
+a certain property. A weak is-a relationship can be modeled using interfaces. For example, all strings are 
+comparable, so the String class implements the Comparable interface.
+A circle or a rectangle is a geometric object, so Circle can be designed as a subclass of GeometricObject. 
+Circles are different and comparable based on their radii, so Circle can implement the Comparable interface.
+Interfaces are more flexible than abstract classes because a subclass can extend only one superclass but 
+can implement any number of interfaces. However, interfaces cannot contain data fields. In Java 8, interfaces 
+can contain default methods and static methods, which are very useful to simplify class design.
