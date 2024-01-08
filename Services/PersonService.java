@@ -368,13 +368,19 @@ public class PersonService {
   }
 
   /**
-   * Manually creates a new patient and add it to the list of patients.
+   * Collects information about a patient and either adds a new patient or updates existing
+   * patient information based on user input. The method prompts the user to enter patient
+   * details such as name, birth date, address, phone number, gender, medical records,
+   * current symptoms, and insurance company. If the patient is already registered, the user
+   * has the option to update the information. The updated or new patient is then added to
+   * the list of patients, and the patient data is saved to a file.
    *
-   * @param patients The list of existing patients.
-   * @return The updated list of patients after adding the new patient.
-   * @throws FileNotFoundException If there is an issue with file operations.
+   * @param patients The list of patients to which the new patient or updated information
+   *                 will be added.
+   * @throws FileNotFoundException If an error occurs while attempting to update the patient
+   *                               data file.
    */
-  public static void creatPatientManually(List<Patient> patients) throws FileNotFoundException {
+  public static void insertUpdatePatient(List<Patient> patients) throws FileNotFoundException {
     String name;
     int id = patients.size();
     LocalDate birthDate;
@@ -477,13 +483,19 @@ public class PersonService {
   }
 
   /**
-   * Manually creates a new doctor and add it to the list of doctors.
+   * Collects information about a doctor and either adds a new doctor or updates existing
+   * doctor information based on user input. The method prompts the user to enter doctor
+   * details such as name, birth date, address, phone number, specialty, and years in practice.
+   * If the doctor is already registered, the user has the option to update the information.
+   * The updated or new doctor is then added to the list of doctors, and the doctor data is
+   * saved to a file.
    *
-   * @param doctors The list of existing doctors.
-   * @return The updated list of doctors after adding the new doctor.
-   * @throws FileNotFoundException If there is an issue with file operations.
+   * @param doctors The list of doctors to which the new doctor or updated information will
+   *                be added.
+   * @throws FileNotFoundException If an error occurs while attempting to update the doctor
+   *                               data file.
    */
-  public static void creatDoctorManually(List<Doctor> doctors) throws FileNotFoundException {
+  public static void insertUpdateDoctor(List<Doctor> doctors) throws FileNotFoundException {
     String name;
     int id = doctors.size();
     LocalDate birthDate;
@@ -568,13 +580,19 @@ public class PersonService {
   }
 
   /**
-   * Manually creates a new nurse and add it to the list of nurses.
+   * Collects information about a nurse and either adds a new nurse or updates existing
+   * nurse information based on user input. The method prompts the user to enter nurse
+   * details such as name, birth date, address, phone number, years in practice, and skill.
+   * If the nurse is already registered, the user has the option to update the information.
+   * The updated or new nurse is then added to the list of nurses, and the nurse data is
+   * saved to a file.
    *
-   * @param doctors The list of existing nurses.
-   * @return The updated list of nurses after adding the new nurse.
-   * @throws FileNotFoundException If there is an issue with file operations.
+   * @param nurses The list of nurses to which the new nurse or updated information will
+   *               be added.
+   * @throws FileNotFoundException If an error occurs while attempting to update the nurse
+   *                               data file.
    */
-  public static void creatNurseManually(List<Nurse> nurses) throws FileNotFoundException {
+  public static void insertUpdateNurse(List<Nurse> nurses) throws FileNotFoundException {
     String name;
     int id = nurses.size();
     LocalDate birthDate;

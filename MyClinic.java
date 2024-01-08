@@ -58,7 +58,7 @@ public class MyClinic {
                             + "8 - Quit.%n"
                             + "Please enter number 1-8 to choose your option: ";
 
-    String INPUT_MENU_OPTIONS = "Enter 1 to input data from file, enter 2 to input data manually: ";   
+    String INPUT_MENU_OPTIONS = "Enter 1 to input data from file, enter 2 to insert or update data manually: ";   
     String OUTPUT_MENU_OPTIONS = "Enter request%n"
                                 + "1 - Print patients list.%n"
                                 + "2 - Print Doctors list.%n"
@@ -94,7 +94,7 @@ public class MyClinic {
             PersonService.creatPatientsFromFile(patients);
             break;
           case 2:
-            PersonService.creatPatientManually(patients);
+            PersonService.insertUpdatePatient(patients);
             break;
         }
         break;
@@ -110,7 +110,7 @@ public class MyClinic {
             PersonService.creatDoctorsFromFile(doctors);
             break;
           case 2:
-            PersonService.creatDoctorManually(doctors);
+            PersonService.insertUpdateDoctor(doctors);
             break;
         }
         break;
@@ -126,7 +126,7 @@ public class MyClinic {
             PersonService.creatNursesFromFile(nurses);
             break;
           case 2:
-            PersonService.creatNurseManually(nurses);
+            PersonService.insertUpdateNurse(nurses);
             break;
         }
         break;
