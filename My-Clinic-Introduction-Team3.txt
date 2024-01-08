@@ -4,14 +4,14 @@ PROJECT INITIATION
 Clinic basic information settings:
 
 	1, Name of the company:
-		My Clinic
+		Team3 Clinic
 		
 	2, Creation time and branches
 		Clinic created in October 2023, no branch date
 		
 	3, Employee information
 		Total number of employees: 6.
-		Including 1 director, 2 nurses and 3 doctors
+		Including 3 nurses and 3 doctors
 		
 	4, Department settings and 
 		Two departments: Psychology and Physical Therapy
@@ -69,7 +69,7 @@ Basic functional assumptions of the clinic management system:
 ----------
 
 
-Specify the Abstract class and the inherited classes: (see the UML diagram)
+Specify the Abstract class and the inherited classes:  --- UML Diagram ( UML-？？？）
 
 
 the Abstract class (Super-Class):
@@ -531,39 +531,33 @@ Invoice
 				"Invoice created on ", getCreationTimestamp());
 	}
 
-===========
+...................................................................
 
-Instance vs. Static
-
-A variable or method that is dependent on a specific instance of the class must be an instance variable 
-or method. A variable that is shared by all the instances of a class should be declared static. 
-For example, the variable numberOfObjects in Circle is shared by all the objects of the Circle class, 
-and therefore is declared static. A method that is not dependent on a specific instance should be 
-defined as a static method. For instance, the getNumberOfObjects() method in Circle is not tied to 
-any specific instance and therefore is defined as a static method.
-Always reference static variables and methods from a class name (rather than a reference variable) to 
-improve readability and avoid errors.
+the classes for services
 
 
-Inheritance vs. Aggregation
+AppointmentService --- UML Diagram ( UML-Appointment）
 
-The difference between inheritance and aggregation is the difference between an is-a and a has-a 
-relationship. For example, an apple is a fruit; thus, you would use inheritance to model the relationship
- between the classes Apple and Fruit. A person has a name; thus, you would use aggregation to model 
- the relationship between the classes Person and Name.
+
+TreatmentService   --- UML Diagram ( UML-Treatment）
+
+
+InvoiveService     --- UML Diagram ( UML-？？？）
+
+
+PersonService      --- UML Diagram ( UML-？？？）
+
+
+
+...................................................................
+
+emus
+
+InsuranceCompany    --- UML Diagram ( UML-？？？）
+
+
+
+
+
  
  
-Interfaces vs. Abstract Classes
-
-Both interfaces and abstract classes can be used to specify common behavior for objects. How do you decide 
-whether to use an interface or a class? In general, a strong is-a relationship that clearly describes 
-a parent–child relationship should be modeled using classes. For example, since an orange is a fruit, 
-their relationship should be modeled using class inheritance.
-A weak is-a relationship, also known as an is-kind-of relationship, indicates that an object possesses 
-a certain property. A weak is-a relationship can be modeled using interfaces. For example, all strings are 
-comparable, so the String class implements the Comparable interface.
-A circle or a rectangle is a geometric object, so Circle can be designed as a subclass of GeometricObject. 
-Circles are different and comparable based on their radii, so Circle can implement the Comparable interface.
-Interfaces are more flexible than abstract classes because a subclass can extend only one superclass but 
-can implement any number of interfaces. However, interfaces cannot contain data fields. In Java 8, interfaces 
-can contain default methods and static methods, which are very useful to simplify class design.
