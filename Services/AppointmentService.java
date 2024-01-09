@@ -14,6 +14,18 @@ import Classes.Patient;
 public class AppointmentService {
   static Scanner console = new Scanner(System.in);
 
+  /**
+   * Creates a new appointment by collecting information such as patient name, doctor name,
+   * phone number, and appointment date from the user. It validates whether the provided
+   * patient and doctor names exist in the respective records. If not, the user is prompted
+   * to either create a new patient or enter a valid name. The appointment date is entered
+   * with the format "yyyy-MM-dd HH:mm:ss". The new appointment is then added to the list of
+   * appointments, and relevant details are displayed.
+   *
+   * @param appointments The list of appointments to which the new appointment will be added.
+   * @param patients     The list of patients to check and retrieve patient information.
+   * @param doctors      The list of doctors to check and retrieve doctor information.
+   */
   public static void creatAppointments(List<Appointment> appointments, List<Patient> patients, List<Doctor> doctors) {
     int appointmentId = appointments.size();
     String patientName = "";
@@ -98,6 +110,16 @@ public class AppointmentService {
     System.out.println(appointment);
   }
 
+  /**
+   * Prints the details of each appointment in the provided list of appointments
+   * to a file named "Appointments_of_Clinic.txt". The information is also displayed
+   * on the console. After printing, a message is shown indicating where the updated
+   * data can be found.
+   *
+   * @param appointments The list of appointments whose details will be printed.
+   * @throws FileNotFoundException If the specified file "Appointments_of_Clinic.txt"
+   *                               cannot be created or opened for writing.
+   */
   public static void printOutAppointments(List<Appointment> appointments) throws FileNotFoundException {
     PrintWriter outFile;
     outFile = new PrintWriter("Appointments_of_Clinic.txt");

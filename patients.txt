@@ -16,9 +16,9 @@ Runny nose, Sneezing
 Company B
 Bob Brown
 1980-03-10
-789 Elm St
+123 Elm St
 555-987-2346
 Male
 High blood pressure
 Headache, Dizziness
-Company C
+No insurance company

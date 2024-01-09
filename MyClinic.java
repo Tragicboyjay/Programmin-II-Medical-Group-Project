@@ -45,7 +45,7 @@ public class MyClinic {
     int secondLevelOption;
     String temp = "";
     String MAIN_MENU_OPTION = "%n=======================%n"
-                            + "Welcom to TEAM3 Clinic!%n"
+                            + "Welcome to TEAM3 Clinic!%n"
                             + "=======================%n"
                             + "Enter request%n"
                             + "1 - Create patients.%n"
@@ -74,7 +74,6 @@ public class MyClinic {
     List<Treatment> treatments = new ArrayList<>();
     List<Invoice> invoice = new ArrayList<>();
     List<Appointment> appointments = new ArrayList<>();
-
 
     while(firstLevelOption != 8){
       System.out.printf(MAIN_MENU_OPTION);

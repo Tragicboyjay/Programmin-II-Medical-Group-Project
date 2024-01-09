@@ -23,3 +23,8 @@ Nancy Johnson
 555-555-5555
 8
 Pediatrics
+
+
+Treatment description
+-------------------
+Comprehensive check-up and blood tests.

@@ -15,6 +15,17 @@ import java.util.Scanner;
 
 public class InvoiveService {
   static Scanner console = new Scanner(System.in);
+  
+  /**
+   * Creates invoices for treatments received by a patient and adds them to the provided list of invoices.
+   * This method prompts the user to enter necessary details for generating invoices, including registration fee,
+   * medication price per unit, and diagnostic test fee. It calculates the insurance coverage rate based on the
+   * patient's insurance company. The generated invoices are then added to the list for documentation and record-keeping.
+   *
+   * @param invoiceList The list of invoices to which newly generated invoices will be added.
+   * @param patients    The list of patients to check for treatment records and obtain insurance information.
+   * @throws FileNotFoundException If the specified file is not found during the printing of invoices.
+   */
   public static void creatInvoice(List<Invoice> invoceList, List<Patient> patients) throws FileNotFoundException {
     int invoiceId = invoceList.size();
     String payorName = "";
@@ -100,7 +111,14 @@ public class InvoiveService {
     }
   }
 
-  // Method to print the invoice out both on screen and export as txt file
+  /**
+   * Prints out the details of invoices to a file named "Invoice.txt" and displays them on the console.
+   * Each invoice is separated by a blank line for better readability. The exported file serves as a record
+   * of all invoices, and the method notifies the user once the export is complete.
+   *
+   * @param invoiceList The list of invoices to be printed and exported.
+   * @throws FileNotFoundException If the specified file ("Invoice.txt") is not found during the printing of invoices.
+   */
   public static void printInvoice(List<Invoice> invoiceList) throws FileNotFoundException {
     PrintWriter outFile;
     String fileName = "Invoice.txt";
@@ -115,6 +133,16 @@ public class InvoiveService {
     outFile.close();
   }
 
+  /**
+   * Prints out the details of invoices for a specific payor to a file named "Invoice_{payorName}.txt" and
+   * displays them on the console. Each invoice is separated by a blank line for better readability.
+   * The exported file serves as a record of invoices for the specified payor, and the method notifies
+   * the user once the export is complete.
+   *
+   * @param invoiceList The list of invoices containing records of various payors.
+   * @param payorName   The name of the payor for whom invoices are to be printed and exported.
+   * @throws FileNotFoundException If the specified file ("Invoice_{payorName}.txt") is not found during the printing of invoices.
+   */
   public static void printInvoiceOfPerson(List<Invoice> invoiceList, String payorName) throws FileNotFoundException {
     PrintWriter outFile;
     String fileName = "Invoice_" + payorName + ".txt";

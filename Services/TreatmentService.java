@@ -15,6 +15,20 @@ import Classes.Treatment;
 
 public class TreatmentService {
   static Scanner console = new Scanner(System.in);
+
+  /**
+   * Creates a new treatment and associates it with a patient, doctor, and nurse.
+   * Collects information about the patient, doctor, and nurse involved in the
+   * treatment, as well as details such as treatment description, start and end dates,
+   * and the need for a diagnostic test. Updates patient information by adding the
+   * attending doctor and treatment. Also updates the doctor information by adding the
+   * assigned patient. The created treatment is added to the list of treatments.
+   *
+   * @param treatments   The list of treatments where the new treatment will be added.
+   * @param patients     The list of patients to associate with the treatment.
+   * @param doctors      The list of doctors to associate with the treatment.
+   * @param nurses       The list of nurses to associate with the treatment.
+   */
   public static void creatTreatment(List<Treatment> treatments, List<Patient> patients, List<Doctor> doctors, List<Nurse> nurses) {
     int treatmentId = treatments.size();
     String patientName = "";
@@ -159,6 +173,15 @@ public class TreatmentService {
     System.out.printf("%nA new treatment No.%d has been registered!%n",  treatmentId);
   }
 
+  /**
+   * Prints out the details of each treatment in the provided list of treatments.
+   * Writes the treatment information to a text file named "Treatments_of_Clinic.txt"
+   * and also displays the information on the console. This method facilitates the
+   * documentation and record-keeping of treatments within the clinic.
+   *
+   * @param treatments   The list of treatments to be printed and recorded.
+   * @throws FileNotFoundException If the specified file "Treatments_of_Clinic.txt" is not found.
+   */
   public static void printOutTreatments(List<Treatment> treatments) throws FileNotFoundException {
     PrintWriter outFile;
     outFile = new PrintWriter("Treatments_of_Clinic.txt");
