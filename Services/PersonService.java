@@ -386,7 +386,8 @@ public class PersonService {
     LocalDate birthDate;
     String address;
     String phone;
-    String gender;
+    int genderChoice = 0;
+    String gender = "";
     String medicalRecords;
     String currentSymptoms;
     String insuranceCompany;
@@ -397,8 +398,23 @@ public class PersonService {
     boolean update = false;
     Patient patient;
 
-    System.out.print("Enter patient name: ");
-    name = console.nextLine();
+    while (true) {
+      try {
+        System.out.print("Enter patient name (First & Last): ");
+        name = console.nextLine();
+
+        if (name.matches("^[A-Za-z]+ [A-Za-z]+$")) {
+          break;
+        }
+        else {
+          throw new Exception("Name input in valid please try again.");
+        }
+
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+    }
+
     
     while (true) {
       
@@ -428,14 +444,72 @@ public class PersonService {
       }
     }
     
-    System.out.print("Enter patient's address: ");
-    address = console.nextLine();
-    
-    System.out.print("Enter patient's phone number: ");
-    phone = console.nextLine();
+    while (true) {
+      try {
+        System.out.print("Enter patient's address: ");
+        address = console.nextLine();
+        
+        if (address.matches("[A-Za-z0-9]+")) {
+          break;
+        }
+        else {
+          throw new Exception("The address input was invalid please try again.");
+        }
 
-    System.out.print("Enter patient's gender: ");
-    gender = console.nextLine();
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+    }
+
+    
+    while (true) {
+
+      try{
+        System.out.print("Enter patient's phone number (XXX-XXX-XXXX): ");
+        phone = console.nextLine();
+
+        if (phone.matches("^[2-9][0-9]{2}-[0-9]{3}-[0-9]{4}")) {
+          break;
+        } 
+        else {
+          throw new Exception("Invalid phone number input please try again.");
+        }
+         
+      }
+      catch (Exception e){
+        System.out.println(e.getMessage());
+      }
+    }
+
+
+    while (genderChoice != 1 & genderChoice != 2 & genderChoice != 3) {
+      
+      System.out.print("Enter patient's gender (1: Male, 2: Female, 3: other(s)): ");
+      genderChoice = console.nextInt();
+
+      switch (genderChoice) {
+        case (1):
+          gender = "male";
+          console.nextLine();
+          break;
+
+        case (2):
+          gender = "female";
+          console.nextLine();
+          break;
+
+        case (3):
+          gender = "other";
+          break;
+      
+        default:
+          System.out.print("Your input is invalid please try again.");
+          console.nextLine();
+          break;
+      }
+      
+    }
+
 
     System.out.print("Enter patient's medicalRecords: ");
     medicalRecords = console.nextLine();
@@ -508,8 +582,22 @@ public class PersonService {
     boolean update = false;
     Doctor doctor;
 
-    System.out.print("Enter doctor name: ");
-    name = console.nextLine();
+    while (true) {
+      try {
+        System.out.print("Enter doctor's name(First & Last): ");
+        name = console.nextLine();
+
+        if (name.matches("^[A-Za-z]+ [A-Za-z]+$")) {
+          break;
+        }
+        else {
+          throw new Exception("Name input in valid please try again.");
+        }
+
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+    }
 
     while (true) {
       
@@ -539,12 +627,43 @@ public class PersonService {
       }
     }
 
-    System.out.print("Enter doctor's address: ");
-    address = console.nextLine();
+    while (true) {
+      try {
+        System.out.print("Enter doctor's address: ");
+        address = console.nextLine();
+        
+        if (address.matches("[A-Za-z0-9]+")) {
+          break;
+        }
+        else {
+          throw new Exception("The address input was invalid please try again.");
+        }
 
-    System.out.print("Enter doctor's phone number: ");
-    phone = console.nextLine();
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+    }
 
+
+    while (true) {
+
+      try{
+        System.out.print("Enter doctor's phone number (XXX-XXX-XXXX): ");
+        phone = console.nextLine();
+
+        if (phone.matches("^[2-9][0-9]{2}-[0-9]{3}-[0-9]{4}")) {
+          break;
+        } 
+        else {
+          throw new Exception("Invalid phone number input please try again.");
+        }
+         
+      }
+      catch (Exception e){
+        System.out.println(e.getMessage());
+      }
+    }
+    
     System.out.print("Enter doctor's specialty: " );
     specialty = console.nextLine();
 
