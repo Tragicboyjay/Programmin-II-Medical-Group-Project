@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 Jack Johnson
 2005-01-15
 123 Main St
@@ -23,5 +22,3 @@ Male
 High blood pressure
 Headache, Dizziness
 No insurance company
-=======
->>>>>>> Stashed changes
