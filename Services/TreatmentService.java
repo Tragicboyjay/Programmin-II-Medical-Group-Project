@@ -153,6 +153,7 @@ public class TreatmentService {
         break;
       } catch (InputMismatchException e) {
         System.out.printf("You must enter true or false. Please try again.%n%n");
+        console.next();
       }
     }
 
