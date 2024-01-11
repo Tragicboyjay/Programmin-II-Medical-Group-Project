@@ -197,6 +197,7 @@ public class MyClinic {
           // If there are treatments, generate invoices
           InvoiveService.creatInvoice(invoice, patients);
           break;
+
         case 7:
           // Sub-menu for printing data
           System.out.printf(OUTPUT_MENU_OPTIONS);
@@ -223,6 +224,7 @@ public class MyClinic {
                 break;
             }
           break;
+          
         // Testing-specific hidden option, can import all person data at once
         case 999:
           PatientService.creatPatientsFromFile(patients);
