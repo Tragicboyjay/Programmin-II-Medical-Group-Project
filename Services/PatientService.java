@@ -77,10 +77,10 @@ public class PatientService {
       Patient patient = new Patient(name, birthDate, address, phone, id, gender, medicalRecords, currentSymptoms, insuranceCompany);
 
       patients.add(patient);
-      updatePatients(patients);
       System.out.println("A new patient added!");
       System.out.println();
     }
+    updatePatients(patients);
     inFile.close();
   }
 

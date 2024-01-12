@@ -66,10 +66,10 @@ public class NurseService {
       Nurse nurse = new Nurse(name, birthDate, address, phone, id, yearsInPractice, skill);
 
       nurses.add(nurse);
-      updateNurses(nurses);
       System.out.println("A new nurse added!");
       System.out.println();
     }
+    updateNurses(nurses);
     inFile.close();
   }
 

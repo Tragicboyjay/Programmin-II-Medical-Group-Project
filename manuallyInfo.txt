@@ -9,22 +9,35 @@ Allergies to pollen
 Runny nose, Sneezing
 No insurance company
 
+Bob Brown
+1980-03-10
+789 Elm St
+555-777-6666
+Male
+High blood pressure
+Headache, Dizziness
+Company C
+
 
 Doctor
 ---------
-
-
+Michael Rodriguez
+Emily Turner
 
 Nurse
 ---------
-Nancy Johnson
-1975-05-20
-123 Oak St
-555-555-5555
-8
-Pediatrics
+David White
+Eva Martinez
 
 
-Treatment description
--------------------
-Comprehensive check-up and blood tests.
+treatment description: Regular checkup
+2023-11-10
+2022-12-28
+true
+
+Prescription refill
+2024-01-01
+2024-01-05
+false
+
+2024-01-15 10:30:00

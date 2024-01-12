@@ -64,10 +64,10 @@ public class DoctorService {
 
       Doctor doctor = new Doctor(name, birthDate, address, phone, id, specialty, yearsInPractice);
       doctors.add(doctor);
-      updateDoctors(doctors);
       System.out.println("A new doctor added!");
       System.out.println();
     }
+    updateDoctors(doctors);
     inFile.close();
   }
 
