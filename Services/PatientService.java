@@ -26,7 +26,7 @@ public class PatientService {
    */
   public static void creatPatientsFromFile(List<Patient> patients) throws FileNotFoundException {
     String name;
-    int id = patients.size();
+    int id = 0;
     LocalDate birthDate;
     String address;
     String phone;
@@ -72,7 +72,11 @@ public class PatientService {
         continue;
       }
 
-      id++;
+      if(patients.isEmpty()) {
+        id = 1;
+      } else {
+        id = patients.get(patients.size() - 1).getPatientId() + 1;
+      }
 
       Patient patient = new Patient(name, birthDate, address, phone, id, gender, medicalRecords, currentSymptoms, insuranceCompany);
 
@@ -240,8 +244,6 @@ public class PatientService {
         break;
     }
 
-    id++;
-
     if (update) {
       patient = patientComparator(patients, name, birthDate);
       patient.setAddress(address);
@@ -252,6 +254,13 @@ public class PatientService {
       patient.setInsuranceCompany(insuranceCompany);
       System.out.println("Information of " + name + " is updated!");
     } else {
+      
+      if(patients.isEmpty()) {
+        id = 1;
+      } else {
+        id = patients.get(patients.size() - 1).getPatientId() + 1;
+      }
+
       patient = new Patient(name, birthDate, address, phone, id, gender, medicalRecords, currentSymptoms, insuranceCompany);
       patients.add(patient);
       System.out.println("A new patient added!");
