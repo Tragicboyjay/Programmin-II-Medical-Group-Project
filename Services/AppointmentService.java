@@ -26,7 +26,7 @@ public class AppointmentService {
    * @param patients     The list of patients to check and retrieve patient information.
    * @param doctors      The list of doctors to check and retrieve doctor information.
    */
-  public static void creatAppointments(List<Appointment> appointments, List<Patient> patients, List<Doctor> doctors) {
+  public static void creatAppointments(List<Appointment> appointments, List<Patient> patients, List<Doctor> doctors) throws FileNotFoundException {
     int appointmentId = appointments.size();
     String patientName = "";
     String doctorName = "";
@@ -35,8 +35,6 @@ public class AppointmentService {
     boolean found = false;
     String print = "";
     String dateString;
-
-    System.out.print("Please enter the name of the patient: ");
 
     // To check whether this patient is in the record.
     while (!found) {
@@ -53,13 +51,15 @@ public class AppointmentService {
       }
 
       if (!found) {
-          System.out.println("Patient not found. Do you want to create a patient(Y) or enter a valid name?");
-          print = console.next();
+        System.out.println("Patient not found. Do you want to create a patient(Y) or re-enter a valid name(R)or go back to main menu(N)?");
+        print = console.nextLine();
 
-          if(print.equalsIgnoreCase("Y")){
-            // to be added: function of input doctors patients manually
-            found = true;
-          }
+        if(print.equalsIgnoreCase("Y")){
+          PatientService.insertUpdatePatient(patients);
+        } else if(print.equalsIgnoreCase("R")){
+        } else if(print.equalsIgnoreCase("N")){
+          return;
+        }
       }
     }
 
