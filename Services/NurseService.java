@@ -135,7 +135,7 @@ public class NurseService {
         System.out.print("Enter nurse's address: ");
         address = console.nextLine();
         
-        if (address.matches("[A-Za-z0-9]+")) {
+        if (address.matches("[A-Za-z0-9\\s]+")) {
           break;
         }
         else {

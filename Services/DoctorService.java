@@ -135,7 +135,7 @@ public class DoctorService {
         System.out.print("Enter doctor's address: ");
         address = console.nextLine();
         
-        if (address.matches("[A-Za-z0-9]+")) {
+        if (address.matches("[A-Za-z0-9\\s]+")) {
           break;
         }
         else {

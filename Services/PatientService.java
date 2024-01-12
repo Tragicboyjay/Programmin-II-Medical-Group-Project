@@ -151,20 +151,20 @@ public class PatientService {
     
     while (true) {
       try {
-        System.out.print("Enter patient's address: ");
-        address = console.nextLine();
-        
-        if (address.matches("[A-Za-z0-9]+")) {
-          break;
-        }
-        else {
-          throw new Exception("The address input was invalid please try again.");
-        }
-
+          System.out.print("Enter patient's address: ");
+          address = console.nextLine();
+  
+          // Allow letters, numbers, and spaces in the address
+          if (address.matches("[A-Za-z0-9\\s]+")) {
+              break;
+          } else {
+              throw new Exception("The address input was invalid. Please try again.");
+          }
+  
       } catch (Exception e) {
-        System.out.println(e.getMessage());
+          System.out.println(e.getMessage());
       }
-    }
+  }
 
     
     while (true) {
@@ -194,17 +194,17 @@ public class PatientService {
 
       switch (genderChoice) {
         case (1):
-          gender = "male";
+          gender = "Male";
           console.nextLine();
           break;
 
         case (2):
-          gender = "female";
+          gender = "Female";
           console.nextLine();
           break;
 
         case (3):
-          gender = "other";
+          gender = "Other";
           break;
       
         default:
