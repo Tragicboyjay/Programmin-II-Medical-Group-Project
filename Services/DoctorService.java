@@ -97,22 +97,9 @@ public class DoctorService {
     boolean update = false;
     Doctor doctor;
 
-    while (true) {
-      try {
-        System.out.print("Enter doctor's name(First & Last): ");
-        name = console.nextLine();
+    System.out.print("Enter doctor's name: ");
+    name = console.nextLine();
 
-        if (name.matches("^[A-Za-z]+ [A-Za-z]+$")) {
-          break;
-        }
-        else {
-          throw new Exception("Name input in valid please try again.");
-        }
-
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }
-    }
 
     while (true) {
       
@@ -142,6 +129,7 @@ public class DoctorService {
       }
     }
 
+
     while (true) {
       try {
         System.out.print("Enter doctor's address: ");
@@ -158,6 +146,7 @@ public class DoctorService {
         System.out.println(e.getMessage());
       }
     }
+
 
 
     while (true) {

@@ -128,12 +128,44 @@ public class NurseService {
         return;
       }  
     }
+    
+    // address input validation 
+    while (true) {
+      try {
+        System.out.print("Enter nurse's address: ");
+        address = console.nextLine();
+        
+        if (address.matches("[A-Za-z0-9]+")) {
+          break;
+        }
+        else {
+          throw new Exception("The address input was invalid please try again.");
+        }
 
-    System.out.print("Enter nurse's address: ");
-    address = console.nextLine();
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+    }
 
-    System.out.print("Enter nurse's phone number: ");
-    phone = console.nextLine();
+    // phone number input validation 
+    while (true) {
+
+      try{
+        System.out.print("Enter nurse's phone number (XXX-XXX-XXXX): ");
+        phone = console.nextLine();
+
+        if (phone.matches("^[2-9][0-9]{2}-[0-9]{3}-[0-9]{4}")) {
+          break;
+        } 
+        else {
+          throw new Exception("Invalid phone number input please try again.");
+        }
+         
+      }
+      catch (Exception e){
+        System.out.println(e.getMessage());
+      }
+    }
 
     while (true) {
       

@@ -115,22 +115,10 @@ public class PatientService {
     boolean update = false;
     Patient patient;
 
-    while (true) {
-      try {
-        System.out.print("Enter patient name (First & Last): ");
-        name = console.nextLine();
 
-        if (name.matches("^[A-Za-z]+ [A-Za-z]+$")) {
-          break;
-        }
-        else {
-          throw new Exception("Name input in valid please try again.");
-        }
+    System.out.print("Enter patient name: ");
+    name = console.nextLine();
 
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }
-    }
 
     
     while (true) {
