@@ -1,7 +1,7 @@
 /**
  * Team 3 Clinic System Demo 
  * 
- * @version 2.0
+ * @version 2.5
  * @since 2023-12-18
  * @author Team3 (Fei Li, Timothy Lazurka, Justice Manly, Jie Li)
  */

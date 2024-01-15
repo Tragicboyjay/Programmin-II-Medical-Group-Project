@@ -1,10 +1,12 @@
 package Services;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -311,18 +313,33 @@ public class PatientService {
    * @throws FileNotFoundException If there is an issue with file operations.
    */
   public static void updatePatients(List<Patient> patients) throws FileNotFoundException {
-    PrintWriter outFile;
-    outFile = new PrintWriter("patients.txt");
+    Formatter output;
+        try {
+            // Provide the file pat
+            File file = new File("patients.txt");
+            output = new Formatter(file); 
+        } catch (SecurityException securityException) {
+            System.err.println("Write permission denied. Terminating.");
+            System.exit(1); 
+            return; 
+        }
+
     for (Patient patient : patients) {
-      outFile.println(patient.getName());
-      outFile.println(patient.getBirthDate());
-      outFile.println(patient.getAddress());
-      outFile.println(patient.getPhone());
-      outFile.println(patient.getGender());
-      outFile.println(patient.getMedicalRecords());
-      outFile.println(patient.getCurrentSymptoms());
-      outFile.println(patient.getInsuranceCompany());
+      output.format("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n", patient.getName(), patient.getBirthDate(), patient.getAddress(), patient.getPhone(), patient.getGender(), patient.getMedicalRecords(),patient.getCurrentSymptoms(), patient.getInsuranceCompany());
     }
-    outFile.close();
+    output.close();
+    // PrintWriter outFile;
+    // outFile = new PrintWriter("patients.txt");
+    // for (Patient patient : patients) {
+    //   outFile.println(patient.getName());
+    //   outFile.println(patient.getBirthDate());
+    //   outFile.println(patient.getAddress());
+    //   outFile.println(patient.getPhone());
+    //   outFile.println(patient.getGender());
+    //   outFile.println(patient.getMedicalRecords());
+    //   outFile.println(patient.getCurrentSymptoms());
+    //   outFile.println(patient.getInsuranceCompany());
+    // }
+    // outFile.close();
   }
 }
